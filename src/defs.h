@@ -6,6 +6,9 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
+#define NUM_SPRITES 3
+#define NUM_SOUNDS 0
+
 #define FALSE 0
 #define TRUE 1
 

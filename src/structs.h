@@ -1,28 +1,30 @@
 #include "defs.h"
 
 typedef struct StartMenu{
+  int atStartMenu;
   SDL_Surface *background;
   SDL_TTF *font;
 } StartMenu;
 
 typedef struct Game{
-  int time;
+  int time, inGame;
   SDL_Surface *background;
   SDL_TTF *font;
 } Game;
 
+typedef struct Sprite{
+  SDL_Surface *image;
+} Sprite;
+
 typedef struct Grid{
   int x, y, isEmpty;
-  SDL_Surface *image;
   struct Grid *left, *right, *up, *down;
   //width of each grid stored as constants in defs.h
 } Grid;
 
 typedef struct Tower{
   int x, y, level, kills, type;
-  float health, barrelAngle;
-  SDL_Surface *image; 
-  SDL_Surface *barrel;
+  float health, barrelAngle; 
   //width, cost, dmg, fireRate, sellPrice, etc will be constants in defs.h
 } Tower;
 
