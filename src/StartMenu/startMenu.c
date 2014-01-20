@@ -4,7 +4,7 @@ extern void freeSprites(void);
 extern void freeSounds(void);
 extern void closeFont(TTF_Font *);
 
-void initStartMenu(StartMenu *startMenu);{
+void initStartMenu(StartMenu *startMenu){
   //assign variables
 
   //load images
@@ -28,7 +28,7 @@ void drawStartMenu(StartMenu *startMenu){
 
 };
 
-freeStartMenu(StartMenu *startMenu){
+void freeStartMenu(StartMenu *startMenu){
   //Set the variables free!!
 
 };

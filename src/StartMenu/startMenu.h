@@ -1,3 +1,3 @@
-#include "structs.h"
+#include "../structs.h"
 
 extern StartMenu startMenu;

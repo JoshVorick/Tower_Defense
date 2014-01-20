@@ -10,7 +10,7 @@ Really not worth playing.
 extern void init(char*);
 extern void cleanup(void);
 extern void getInput(void);
-extern void initStartGame(StartMenu *startMenu);
+extern void initStartMenu(StartMenu *startMenu);
 extern void processMouseStartMenu(StartMenu *startMenu);
 extern void updateStartMenu(StartMenu *startMenu);
 extern void drawStartMenu(StartMenu *startMenu);
@@ -22,7 +22,7 @@ extern void updateEnemies(Game *game);
 extern void drawGame(Game *game);
 extern void freeGame(Game *game); //A free game!? Where?! Oh! Its right here!!
 
-main(void){
+int main(void){
   unsigned int fpsLimit = 16;
   int playing = TRUE;
   
@@ -32,23 +32,25 @@ main(void){
   
   while(playing){
     //create and init start menu variables
-    StartMenu startMenu = malloc(sizeof(StartMenu)); 
+    StartMenu *startMenu = malloc(sizeof(StartMenu)); 
+    startMenu->atStartMenu = TRUE;
     initStartMenu(startMenu);
 
-    while(startMenu.atStartMenu){
+    while(startMenu->atStartMenu){
       getInput();
       processMouseStartMenu(startMenu);
       updateStartMenu(startMenu);
       drawStartMenu(startMenu);
       
-      delay(fpsLimit);
+      SDL_Delay(fpsLimit);
       fpsLimit = SDL_GetTicks() + 16;
     }
     free(startMenu);
 
     //create and init game variables
-    Game game = malloc(sizeof(Game));
+    Game *game = malloc(sizeof(Game));
     initGame(game);
+    int inGame = TRUE;
   
     while(inGame){
       getInput();
@@ -57,9 +59,10 @@ main(void){
       updateEnemies(game);
       drawGame(game);
 
-      delay(fpsLimit);
+      SDL_Delay(fpsLimit);
       fpsLimit = SDL_GetTicks() + 16;
     }
     free(game);
   }
+  exit(0);
 }

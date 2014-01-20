@@ -11,6 +11,10 @@
 
 #define FALSE 0
 #define TRUE 1
+#define LEFT 0
+#define RIGHT 1
+#define UP 2
+#define DOWN 3
 
 #define BLUE1_PRICE 25
 #define BLUE2_PRICE 20
@@ -24,6 +28,9 @@
 #define BLUE1_DMG 5
 #define BLUE2_DMG 8
 #define BLUE3_DMG 10
+#define BLUE1_RANGE 50
+#define BLUE2_RANGE 60
+#define BLUE3_RANGE 60
 
 #define GREEN1_PRICE 15
 #define GREEN2_PRICE 10
@@ -37,6 +44,11 @@
 #define GREEN1_DMG 5
 #define GREEN2_DMG 5
 #define GREEN3_DMG 5
+#define GREEN1_RANGE 30
+#define GREEN2_RANGE 30
+#define GREEN3_RANGE 35
+
+#define ENEMY1_SPEED 0.15
 
 enum towerTypes{
   BLUE,
