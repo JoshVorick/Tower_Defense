@@ -9,14 +9,13 @@ Really not worth playing.
 //some useful funktions
 extern void init(char*);
 extern void cleanup(void);
-extern void getInput(void);
+extern void getInput(Input *input);
 extern void initStartMenu(StartMenu *startMenu);
-extern void processMouseStartMenu(StartMenu *startMenu);
-extern void updateStartMenu(StartMenu *startMenu);
+extern void processInputStartMenu(StartMenu *startMenu);
 extern void drawStartMenu(StartMenu *startMenu);
 extern void freeStartMenu(StartMenu *startMenu);
 extern void initGame(Game *game);
-extern void processMouseGame(Game *game);
+extern void processInputGame(Game *game);
 extern void updateTowers(Game *game);
 extern void updateEnemies(Game *game);
 extern void drawGame(Game *game);
@@ -26,43 +25,54 @@ int main(void){
   unsigned int fpsLimit = 16;
   int playing = TRUE;
   
-  init("HOLYMOLYTOWERSDEFENDINGTHINGS!!");
+  init("HOLYTOWERSDEFENDINGTHINGS!!");
 
   atexit(cleanup);
   
   while(playing){
     //create and init start menu variables
     StartMenu *startMenu = malloc(sizeof(StartMenu)); 
-    startMenu->atStartMenu = TRUE;
     initStartMenu(startMenu);
-
+    
     while(startMenu->atStartMenu){
-      getInput();
-      processMouseStartMenu(startMenu);
-      updateStartMenu(startMenu);
-      drawStartMenu(startMenu);
+      SDL_FillRect(screen, NULL, 0);
       
-      SDL_Delay(fpsLimit);
+      getInput(startMenu->input);
+      processInputStartMenu(startMenu);
+      drawStartMenu(startMenu);
+
+      unsigned int ticks = SDL_GetTicks();
+      if(ticks < fpsLimit)
+         SDL_Delay(fpsLimit - ticks);
+      SDL_Flip(screen);
+     
       fpsLimit = SDL_GetTicks() + 16;
     }
-    free(startMenu);
-
+    
+    freeStartMenu(startMenu);   
+    
     //create and init game variables
     Game *game = malloc(sizeof(Game));
     initGame(game);
-    int inGame = TRUE;
-  
-    while(inGame){
-      getInput();
-      processMouseGame(game);
+   
+    while(game->inGame){
+      SDL_FillRect(screen, NULL, 0);
+      
+      getInput(game->input);
+      processInputGame(game);
       updateTowers(game);
       updateEnemies(game);
       drawGame(game);
 
-      SDL_Delay(fpsLimit);
+      unsigned int ticks = SDL_GetTicks();
+      if(ticks < fpsLimit)
+         SDL_Delay(fpsLimit - ticks);
+      SDL_Flip(screen);
+
       fpsLimit = SDL_GetTicks() + 16;
     }
-    free(game);
+
+    freeGame(game);
   }
   exit(0);
 }

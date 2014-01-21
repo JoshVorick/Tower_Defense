@@ -8,8 +8,10 @@
 
 #define NUM_SPRITES 3
 #define NUM_SOUNDS 0
-
-#define FALSE 0
+#define NUM_KEYS 10 /*key 0-3 are for movement
+                    keys 4 is for selecton (enter/space)
+                    key 5-8 are undefined*/
+#define FALSE 0  // key 9 is for any other random key
 #define TRUE 1
 #define LEFT 0
 #define RIGHT 1

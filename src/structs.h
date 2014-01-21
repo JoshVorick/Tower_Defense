@@ -1,7 +1,13 @@
 #include "defs.h"
 
+typedef struct Input{
+  int keys[100];
+} Input;
+
 typedef struct StartMenu{
   int atStartMenu;
+  SDL_Color fontColor, fontBGColor;
+  Input *input;
   SDL_Surface *background;
   TTF_Font *font;
 } StartMenu;
@@ -48,6 +54,8 @@ typedef struct Player{
 
 typedef struct Game{
   int time, inGame;
+  SDL_Color fontColor, fontBGColor;
+  Input *input;
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
   Enemy *enemies; /*Linked list*/

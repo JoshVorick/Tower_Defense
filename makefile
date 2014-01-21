@@ -10,4 +10,4 @@ Tower_Defense: $(OBJS)
 	$(CXX) $(OBJS) -o $@ $(LFLAGS)
 
 clean:
-	rm $(PROG) *.o
+	rm Tower_Defense $(OBJS)
