@@ -35,8 +35,6 @@ int main(void){
     initStartMenu(startMenu);
     
     while(startMenu->atStartMenu){
-      SDL_FillRect(screen, NULL, 0);
-      
       getInput(startMenu->input);
       processInputStartMenu(startMenu);
       drawStartMenu(startMenu);
@@ -44,8 +42,6 @@ int main(void){
       unsigned int ticks = SDL_GetTicks();
       if(ticks < fpsLimit)
          SDL_Delay(fpsLimit - ticks);
-      SDL_Flip(screen);
-     
       fpsLimit = SDL_GetTicks() + 16;
     }
     
@@ -56,8 +52,6 @@ int main(void){
     initGame(game);
    
     while(game->inGame){
-      SDL_FillRect(screen, NULL, 0);
-      
       getInput(game->input);
       processInputGame(game);
       updateTowers(game);
@@ -67,8 +61,6 @@ int main(void){
       unsigned int ticks = SDL_GetTicks();
       if(ticks < fpsLimit)
          SDL_Delay(fpsLimit - ticks);
-      SDL_Flip(screen);
-
       fpsLimit = SDL_GetTicks() + 16;
     }
 

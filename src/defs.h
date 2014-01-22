@@ -3,16 +3,39 @@
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 500
+#define SCREEN_HEIGHT 732
 
-#define NUM_SPRITES 3
-#define NUM_SOUNDS 0
-#define NUM_KEYS 10 /*key 0-3 are for movement
-                    keys 4 is for selecton (enter/space)
-                    key 5-8 are undefined*/
-#define FALSE 0  // key 9 is for any other random key
+#define NUM_SPRITES_STARTMENU 1
+#define NUM_SOUNDS_STARTMENU 0
+#define NUM_KEYS_STARMENU 10
+
+enum startMenuSprites{
+  sBACKGROUND
+};
+
+#define NUM_SPRITES_GAME 9
+#define NUM_SOUNDS_GAME 0
+ 
+enum gameSprites{
+  gBACKGROUND,
+  gGRID_TILE,
+  gALIEN1,
+  gALIEN2,
+  gBLUE1,
+  gBLUE2,
+  gBLUE3,
+  gGREEN1,
+  gGREEN2,
+  gGREEN3
+};
+
+#define NUM_KEYS 10//keys 0-3 are for movement
+                   //keys 4 is for selecton (enter/space)
+                   // key 5-8 are undefined*/
+#define FALSE 0    // key 9 is for any other random key
 #define TRUE 1
+
 #define LEFT 0
 #define RIGHT 1
 #define UP 2

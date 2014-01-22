@@ -30,15 +30,3 @@ void drawImage(SDL_Surface *image, int x, int y){
 
   SDL_BlitSurface(image, NULL, screen, &dest);
 };
-
-void freeSprites(){
-  int i;
-  for(i=0;i<NUM_SPRITES;i++){
-    if(sprites[i].image != NULL)
-      SDL_FreeSurface(sprites[i].image);
-  }
-};
-
-void loadAllSprite(){
-  //loadSprite(INDEX, "location");
-};

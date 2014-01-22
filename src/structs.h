@@ -4,17 +4,17 @@ typedef struct Input{
   int keys[100];
 } Input;
 
-typedef struct StartMenu{
-  int atStartMenu;
-  SDL_Color fontColor, fontBGColor;
-  Input *input;
-  SDL_Surface *background;
-  TTF_Font *font;
-} StartMenu;
-
 typedef struct Sprite{
   SDL_Surface *image;
 } Sprite;
+
+typedef struct StartMenu{
+  int atStartMenu;
+  Sprite sprites[NUM_SPRITES_STARTMENU];
+  SDL_Color fontColor, fontBGColor;
+  Input *input;
+  TTF_Font *font;
+} StartMenu;
 
 typedef struct Grid_Tile{
   int x, y, isEmpty;
@@ -23,12 +23,8 @@ typedef struct Grid_Tile{
 } Grid_Tile;
 
 typedef struct Grid{
-  Grid_Tile tiles;
-  /*Not sure how to store tiles to make the array
-  Needs to be easy to resize
-  Ideas:
-  2Darray that is bigger than most maps
-  Use pointers somehow*/
+  Grid_Tile **tiles;
+  int dimensionX, dimensionY;
 }Grid;
 
 typedef struct Tower{
@@ -54,11 +50,11 @@ typedef struct Player{
 
 typedef struct Game{
   int time, inGame;
+  Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
   Input *input;
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
   Enemy *enemies; /*Linked list*/
-  SDL_Surface *background;
   TTF_Font *font;
 } Game;

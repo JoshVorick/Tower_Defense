@@ -2,6 +2,8 @@
 
 extern void initInput(Input *input);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
+extern SDL_Surface *loadImage(char* name);
+extern void drawImage(SDL_Surface *surface, int x, int y);
 
 void initStartMenu(StartMenu *startMenu){
   //assign variables
@@ -17,7 +19,7 @@ void initStartMenu(StartMenu *startMenu){
   startMenu->fontBGColor.b = 0;
 
   //load images
-  startMenu->background = NULL;
+  startMenu->sprites[sBACKGROUND].image = loadImage("img/StartBackground.png");
 };
 
 void processInputStartMenu(StartMenu *startMenu){
@@ -29,9 +31,12 @@ void processInputStartMenu(StartMenu *startMenu){
 };
 
 void drawStartMenu(StartMenu *startMenu){
-  //draw stuff yo!
+  drawImage(startMenu->sprites[sBACKGROUND].image, 0, 0);
+  
   char *str = "Press any key to start game!";
   drawString(str, 0, 0, startMenu->font, 1, 1, startMenu->fontColor, startMenu->fontBGColor);
+
+  SDL_Flip(screen);
 };
 
 void freeStartMenu(StartMenu *startMenu){
