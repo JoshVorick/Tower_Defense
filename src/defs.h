@@ -8,7 +8,7 @@
 
 #define NUM_SPRITES_STARTMENU 1
 #define NUM_SOUNDS_STARTMENU 0
-#define NUM_KEYS_STARMENU 10
+#define NUM_KEYS_STARTMENU 5
 
 enum startMenuSprites{
   sBACKGROUND
@@ -30,16 +30,23 @@ enum gameSprites{
   gGREEN3
 };
 
-#define NUM_KEYS 10//keys 0-3 are for movement
-                   //keys 4 is for selecton (enter/space)
-                   // key 5-8 are undefined*/
-#define FALSE 0    // key 9 is for any other random key
-#define TRUE 1
+#define NUM_KEYS_GAME 10//keys 0-3 are for movement
+                        //keys 4 is for selecton (enter/space)
+                        // key 5-8 are undefined*/
+                        // key 9 is for any other random key
+enum keys{
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+  SELECT,
+  PAUSE,
+  MENU,
+  OTHER_KEY
+};
 
-#define LEFT 0
-#define RIGHT 1
-#define UP 2
-#define DOWN 3
+#define FALSE 0
+#define TRUE 1
 
 #define BLUE1_PRICE 25
 #define BLUE2_PRICE 20

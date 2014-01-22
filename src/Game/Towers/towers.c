@@ -3,6 +3,7 @@
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy);
 void blueTowerShoot(Enemy *enemy, int level);
 void greenTowerShoot(Enemy *enemy, int level);
+extern void drawImage(SDL_Surface *surface, int x, int y);
 
 void updateTowers(Game *game){
   //Loop through each tower
@@ -30,6 +31,35 @@ void updateTowers(Game *game){
   }
 };
 
+void addTower(Game *game, int towerType){
+  int areAllFourEmpty = FALSE; //checks if all four blocks tower will go on are blank
+  int i,j;
+  for(i=0; i < game->grid->dimensionX-1; i++){ //-1 because edge blocks won't work
+    for(j=0;j < game->grid->dimensionY-1; j++){
+      if(game->grid->selectedTile == &game->grid->tiles[i][j])
+        if(game->grid->tiles[i][j].hasTower == FALSE &&
+            game->grid->tiles[i+1][j].hasTower == FALSE &&
+            game->grid->tiles[i][j+1].hasTower == FALSE &&
+            game->grid->tiles[i+1][j+1].hasTower == FALSE){
+          areAllFourEmpty = TRUE;
+        }
+    }
+  }
+  if(areAllFourEmpty){  
+    Tower *newTower = malloc(sizeof(Tower));
+    newTower->x = game->grid->selectedTile->x;
+    newTower->y = game->grid->selectedTile->y;
+    newTower->health = 100;
+    newTower->barrelAngle = 0;
+    newTower->level = 1;
+    newTower->type = towerType;
+    newTower->kills = 0;
+    newTower->ticksSinceFired = 0;
+    newTower->nextTower = game->towers;
+    game->towers = newTower;
+  }
+};
+
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy){
   while(curEnemy != NULL){
     if((curEnemy->x - x)*(curEnemy->x - x) + (curEnemy->y - y)*(curEnemy->y - y) <= radius*radius)
@@ -46,4 +76,8 @@ void blueTowerShoot(Enemy *enemy, int level){
 
 void greenTowerShoot(Enemy *enemy, int level){
   enemy->health -= GREEN1_DMG;
+};
+
+void drawTower(Sprite *sprites, Tower *tower){
+  drawImage(sprites[tower->type].image, tower->x, tower->y);
 };

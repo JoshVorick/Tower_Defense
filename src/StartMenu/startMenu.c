@@ -1,6 +1,6 @@
 #include "startMenu.h"
 
-extern void initInput(Input *input);
+extern void initInputStartMenu(StartMenu *startMenu);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
 extern SDL_Surface *loadImage(char* name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
@@ -9,7 +9,7 @@ void initStartMenu(StartMenu *startMenu){
   //assign variables
   startMenu->atStartMenu = TRUE;
   startMenu->input = malloc(sizeof(Input));
-  initInput(startMenu->input);
+  initInputStartMenu(startMenu);
   startMenu->font = TTF_OpenFont("fonts/blackWolf.ttf", 16);  
   startMenu->fontColor.r = 55;
   startMenu->fontColor.g = 255;
@@ -22,12 +22,8 @@ void initStartMenu(StartMenu *startMenu){
   startMenu->sprites[sBACKGROUND].image = loadImage("img/StartBackground.png");
 };
 
-void processInputStartMenu(StartMenu *startMenu){
-  //figure out where mouse is and what to do about it
-  int i;
-  for(i=0; i<NUM_KEYS; i++)
-    if(startMenu->input->keys[i])
-      startMenu->atStartMenu = FALSE;
+void updateStartMenu(StartMenu *startMenu){
+
 };
 
 void drawStartMenu(StartMenu *startMenu){

@@ -9,15 +9,14 @@ Really not worth playing.
 //some useful funktions
 extern void init(char*);
 extern void cleanup(void);
-extern void getInput(Input *input);
+extern void getInputStartMenu(StartMenu *startMenu);
 extern void initStartMenu(StartMenu *startMenu);
-extern void processInputStartMenu(StartMenu *startMenu);
+extern void updateStartMenu(StartMenu *startMenu);
 extern void drawStartMenu(StartMenu *startMenu);
 extern void freeStartMenu(StartMenu *startMenu);
 extern void initGame(Game *game);
-extern void processInputGame(Game *game);
-extern void updateTowers(Game *game);
-extern void updateEnemies(Game *game);
+extern void getInputGame(Game *game);
+extern void updateGame(Game *game);
 extern void drawGame(Game *game);
 extern void freeGame(Game *game); //A free game!? Where?! Oh! Its right here!!
 
@@ -25,7 +24,7 @@ int main(void){
   unsigned int fpsLimit = 16;
   int playing = TRUE;
   
-  init("HOLYTOWERSDEFENDINGTHINGS!!");
+  init("HOLYMOLYTOWERSDEFENDINGTHINGS!!");
 
   atexit(cleanup);
   
@@ -35,8 +34,8 @@ int main(void){
     initStartMenu(startMenu);
     
     while(startMenu->atStartMenu){
-      getInput(startMenu->input);
-      processInputStartMenu(startMenu);
+      getInputStartMenu(startMenu);
+      updateStartMenu(startMenu);
       drawStartMenu(startMenu);
 
       unsigned int ticks = SDL_GetTicks();
@@ -52,10 +51,8 @@ int main(void){
     initGame(game);
    
     while(game->inGame){
-      getInput(game->input);
-      processInputGame(game);
-      updateTowers(game);
-      updateEnemies(game);
+      getInputGame(game);
+      updateGame(game);
       drawGame(game);
 
       unsigned int ticks = SDL_GetTicks();

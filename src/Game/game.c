@@ -1,17 +1,20 @@
 #include "game.h"
 
-extern void initInput(Input *input);
+extern void initInputGame(Game *game);
 extern void initGrid(Grid* grid, int x, int y);
+extern void updateTowers(Game *game);
+extern void updateEnemies(Game *game);
 extern void closeFont(TTF_Font *);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
 extern SDL_Surface *loadImage(char *name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
 
 void initGame(Game *game){
-  game->time = 0;
+  game->totalTime = 0;
+  game->levelTime = 0;
   game->inGame = TRUE;
   game->input = malloc(sizeof(Input));
-  initInput(game->input);
+  initInputGame(game);
   game->towers = NULL;
   game->enemies = NULL;
 
@@ -45,11 +48,12 @@ void initGame(Game *game){
   initGrid(game->grid, 75, 50);
 };
 
-void processInputGame(Game *game){
-  int i;
-  for(i=0; i<NUM_KEYS; i++)
-    if(game->input->keys[i])
-      game->inGame = FALSE;
+void updateGame(Game *game){
+  game->totalTime += 1;
+  game->levelTime += 1;
+  
+  updateTowers(game);
+  updateEnemies(game);
 };
 
 void drawGame(Game *game){
@@ -60,6 +64,12 @@ void drawGame(Game *game){
     for(j=0; j < game->grid->dimensionY; j++)
       drawImage(game->sprites[gGRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
 
+  Tower *curTower = game->towers;
+  while(curTower != NULL){
+    drawImage(game->sprites[curTower->type].image, curTower->x, curTower->y);
+    curTower = curTower->nextTower;
+  }
+  
   char *str = "PRESS ANY KEY TO GO TO MENU, ESC TO EXIT";
   drawString(str, 0, 0, game->font, 1, 1, game->fontColor, game->fontBGColor);
   

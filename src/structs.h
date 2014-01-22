@@ -17,13 +17,14 @@ typedef struct StartMenu{
 } StartMenu;
 
 typedef struct Grid_Tile{
-  int x, y, isEmpty;
-  struct Grid *left, *right, *up, *down;
+  int x, y, hasTower;
+  struct Grid_Tile *nextInPath; //points to next tile enemies will take
   /*width of each tile stored as constants in defs.h*/
 } Grid_Tile;
 
 typedef struct Grid{
   Grid_Tile **tiles;
+  Grid_Tile *selectedTile;
   int dimensionX, dimensionY;
 }Grid;
 
@@ -49,12 +50,12 @@ typedef struct Player{
 } Player;
 
 typedef struct Game{
-  int time, inGame;
+  int totalTime, levelTime, inGame;
   Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
   Input *input;
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
-  Enemy *enemies; /*Linked list*/
+  Enemy *enemies;
   TTF_Font *font;
 } Game;
