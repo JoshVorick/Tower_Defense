@@ -2,6 +2,7 @@
 
 extern void initInputGame(Game *game);
 extern void initGrid(Grid* grid, int x, int y);
+extern void initEnemyGenerator(Game*game);
 extern void addEnemies(Game *game);
 extern void updateTowers(Game *game);
 extern void updateEnemies(Game *game);
@@ -17,6 +18,7 @@ void initGame(Game *game){
   game->score = 0;
   game->input = malloc(sizeof(Input));
   initInputGame(game);
+  initEnemyGenerator(game);
   game->towers = NULL;
   game->enemies = NULL;
 
