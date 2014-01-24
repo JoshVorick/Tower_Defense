@@ -50,7 +50,7 @@ typedef struct EnemyGenerator{
 }EnemyGenerator;
 
 typedef struct Game{
-  int totalTime, levelTime, inGame;
+  int totalTime, levelTime, inGame, score;
   Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
   Input *input;

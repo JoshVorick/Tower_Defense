@@ -14,6 +14,7 @@ void initGame(Game *game){
   game->totalTime = 0;
   game->levelTime = 0;
   game->inGame = TRUE;
+  game->score = 0;
   game->input = malloc(sizeof(Input));
   initInputGame(game);
   game->towers = NULL;
@@ -79,7 +80,9 @@ void drawGame(Game *game){
     curEnemy = curEnemy->nextEnemy;
   }
   
-  char *str = "PRESS ANY KEY TO GO TO MENU, ESC TO EXIT";
+  char str[20];
+  sprintf(str, "PRESS ESC TO EXIT %06d", game->score);
+  
   drawString(str, 0, 0, game->font, 1, 1, game->fontColor, game->fontBGColor);
   
   SDL_Flip(screen);

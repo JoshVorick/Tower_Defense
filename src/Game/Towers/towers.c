@@ -9,13 +9,15 @@ void updateTowers(Game *game){
   //Loop through each tower
   Tower *curTower = game->towers;
   while(curTower != NULL){
-    
+    curTower->ticksSinceFired++; 
     switch(curTower->type){
     case gBLUE1:
       if(curTower->ticksSinceFired >= BLUE1_FIRERATE){
         Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y, BLUE1_RANGE, game->enemies);
-        blueTowerShoot(gonnaGetShot, curTower->level);
-        //if killed, get gold, increment towers' kills and player's score
+        if(gonnaGetShot != NULL){
+          blueTowerShoot(gonnaGetShot, curTower->level);
+          curTower->ticksSinceFired = 0;
+        }
       }
       break;
    
@@ -23,6 +25,7 @@ void updateTowers(Game *game){
       if(curTower->ticksSinceFired >= GREEN1_FIRERATE){
         Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y,GREEN1_RANGE, game->enemies);
         greenTowerShoot(gonnaGetShot, curTower->level);
+        curTower->ticksSinceFired = 0;
       }
       break;
     }

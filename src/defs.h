@@ -54,13 +54,13 @@ enum keys{
 #define BLUE1_SELL 18
 #define BLUE2_SELL 35
 #define BLUE3_SELL 48
-#define BLUE1_FIRERATE 20
-#define BLUE2_FIRERATE 15
-#define BLUE3_FIRERATE 12
-#define BLUE1_DMG 5
-#define BLUE2_DMG 8
-#define BLUE3_DMG 10
-#define BLUE1_RANGE 50
+#define BLUE1_FIRERATE 500 
+#define BLUE2_FIRERATE 420
+#define BLUE3_FIRERATE 350
+#define BLUE1_DMG 15 
+#define BLUE2_DMG 18
+#define BLUE3_DMG 25
+#define BLUE1_RANGE 500
 #define BLUE2_RANGE 60
 #define BLUE3_RANGE 60
 
@@ -70,9 +70,9 @@ enum keys{
 #define GREEN1_SELL 10
 #define GREEN2_SELL 18
 #define GREEN3_SELL 26
-#define GREEN1_FIRERATE 30
-#define GREEN2_FIRERATE 25
-#define GREEN3_FIRERATE 20
+#define GREEN1_FIRERATE 300
+#define GREEN2_FIRERATE 250
+#define GREEN3_FIRERATE 200
 #define GREEN1_DMG 5
 #define GREEN2_DMG 5
 #define GREEN3_DMG 5
