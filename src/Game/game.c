@@ -2,6 +2,7 @@
 
 extern void initInputGame(Game *game);
 extern void initGrid(Grid* grid, int x, int y);
+extern void addEnemies(Game *game);
 extern void updateTowers(Game *game);
 extern void updateEnemies(Game *game);
 extern void closeFont(TTF_Font *);
@@ -52,6 +53,8 @@ void updateGame(Game *game){
   game->totalTime += 1;
   game->levelTime += 1;
   
+  addEnemies(game);
+
   updateTowers(game);
   updateEnemies(game);
 };
@@ -68,6 +71,12 @@ void drawGame(Game *game){
   while(curTower != NULL){
     drawImage(game->sprites[curTower->type].image, curTower->x, curTower->y);
     curTower = curTower->nextTower;
+  }
+
+  Enemy *curEnemy = game->enemies;
+  while(curEnemy != NULL){
+    drawImage(game->sprites[curEnemy->type].image, curEnemy->x, curEnemy->y);
+    curEnemy = curEnemy->nextEnemy;
   }
   
   char *str = "PRESS ANY KEY TO GO TO MENU, ESC TO EXIT";

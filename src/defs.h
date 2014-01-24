@@ -81,13 +81,3 @@ enum keys{
 #define GREEN3_RANGE 35
 
 #define ENEMY1_SPEED 0.15
-
-enum towerTypes{
-  BLUE,
-  GREEN
-};
-
-enum enemyTypes{
-  ENEMY1,
-  ENEMY2
-};

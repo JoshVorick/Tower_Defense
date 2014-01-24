@@ -11,7 +11,7 @@ void updateTowers(Game *game){
   while(curTower != NULL){
     
     switch(curTower->type){
-    case BLUE:
+    case gBLUE1:
       if(curTower->ticksSinceFired >= BLUE1_FIRERATE){
         Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y, BLUE1_RANGE, game->enemies);
         blueTowerShoot(gonnaGetShot, curTower->level);
@@ -19,7 +19,7 @@ void updateTowers(Game *game){
       }
       break;
    
-    case GREEN:
+    case gGREEN1:
       if(curTower->ticksSinceFired >= GREEN1_FIRERATE){
         Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y,GREEN1_RANGE, game->enemies);
         greenTowerShoot(gonnaGetShot, curTower->level);

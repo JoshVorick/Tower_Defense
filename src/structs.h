@@ -36,18 +36,18 @@ typedef struct Tower{
 } Tower;
 
 typedef struct Enemy{
-  float x, y, health, type;
-  int dir; /*Direction enemy is walking in*/
-  Grid *myGrid;
+  float x, y, health;
+  int type, dir; /*Direction enemy is walking in*/
+  Grid_Tile *myGrid;
   struct Enemy *nextEnemy;
   /*width, goldForKilling, totalHealth, speed stored as constants in defs.h 
   Something about its path/pathfinding (pointer to struct/var with its path?)
   */
 } Enemy;
 
-typedef struct Player{
-  int score, gold;
-} Player;
+typedef struct EnemyGenerator{
+  int tBetweenEnemy;
+}EnemyGenerator;
 
 typedef struct Game{
   int totalTime, levelTime, inGame;
@@ -57,5 +57,6 @@ typedef struct Game{
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
   Enemy *enemies;
+  EnemyGenerator enemyGenerator;
   TTF_Font *font;
 } Game;
