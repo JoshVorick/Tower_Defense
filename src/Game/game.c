@@ -77,9 +77,12 @@ void drawGame(Game *game){
     drawImage(game->sprites[curEnemy->type].image, curEnemy->x, curEnemy->y);
     curEnemy = curEnemy->nextEnemy;
   }
+
+  SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
+  SDL_FillRect(screen, &rect, SDL_MapRGBA(game->sprites[gALIEN1].image->format,100,100,100,255));
   
   char str[20];
-  sprintf(str, "PRESS ESC TO EXIT %06d", game->score);
+  sprintf(str, "PRESS ESC TO EXIT %d", game->score);
   
   drawString(str, 0, 0, game->font, 1, 1, game->fontColor, game->fontBGColor);
   
