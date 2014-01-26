@@ -24,15 +24,17 @@ typedef struct Tower{
 } Tower;
 
 typedef struct Grid_Tile{
-  int x, y, dirToNextInPath;
+  int x, y, dirToNextInPath, i, j; //x and y -> pixel coor, i and j -> place in grid array
   Tower *myTower; //pointer to the tower on this grid
   struct Grid_Tile *nextInPath; //points to next tile enemies will take
+  struct Grid_Tile *next; //Used to form linkd list of tiles to make pathfinding simpler
 } Grid_Tile;
 
 typedef struct Grid{
   Grid_Tile **tiles;
-  Grid_Tile *selectedTile;
-  int dimensionX, dimensionY, selectedTileX, selectedTileY;
+  Grid_Tile *selectedTile, *startTile, *endTile;
+  int blocksPath; //stores whether a tower placed at selectedTile would block the path
+  int dimensionX, dimensionY;
 }Grid;
 
 typedef struct Enemy{

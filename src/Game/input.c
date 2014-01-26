@@ -1,6 +1,8 @@
 #include "input.h"
 
 extern void addTower(Game *game, int towerType);
+extern void wouldBlockPath(Grid *grid);
+extern void findPath(Grid *grid);
 
 void initInputGame(Game *game){
   int i;
@@ -22,34 +24,42 @@ void getInputGame(Game *game){
             exit(0);
             break;
           case SDLK_SPACE:
-            if(game->grid->selectedTile->myTower == NULL)
+            if(game->grid->blocksPath == FALSE)
               addTower(game, gBLUE1);
           case SDLK_RETURN://Enter key
-            if(game->grid->selectedTile->myTower == NULL)
+            if(game->grid->blocksPath == FALSE)
               addTower(game, gGREEN1);
             break;
           case SDLK_w:
-            if(game->grid->selectedTileY > 0){
-              game->grid->selectedTileY -= 1;
-              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            if(game->grid->selectedTile->j > 0){
+              //move selectedTile
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i][game->grid->selectedTile->j-1];
+              //recalculate if adding a tower here would block the path
+              wouldBlockPath(game->grid);
             }
             break;
           case SDLK_a:
-            if(game->grid->selectedTileX > 0){
-              game->grid->selectedTileX -= 1;
-              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            if(game->grid->selectedTile->i > 0){
+              //move selectedTile
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i-1][game->grid->selectedTile->j];
+              //recalc if adding a tower here would block path
+              wouldBlockPath(game->grid);
             }
             break;
           case SDLK_s:
-            if(game->grid->selectedTileY < game->grid->dimensionY-1){
-              game->grid->selectedTileY += 1;
-              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            if(game->grid->selectedTile->j < game->grid->dimensionY-1){
+              //move selectedTile
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i][game->grid->selectedTile->j + 1];
+              //recalculate if adding a tower here would block path
+              wouldBlockPath(game->grid);
             }
             break;
           case SDLK_d:
-            if(game->grid->selectedTileX < game->grid->dimensionX-1){
-              game->grid->selectedTileX += 1;
-              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            if(game->grid->selectedTile->i < game->grid->dimensionX-1){
+              //move selectedTile
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i+1][game->grid->selectedTile->j];
+              //recalculate if adding a tower here would block path
+              wouldBlockPath(game->grid);
             }
             break;
           default:
