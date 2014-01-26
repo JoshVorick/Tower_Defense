@@ -2,7 +2,7 @@
 
 SDL_Surface *loadImage(char *name){
   //load image all fancy-shmancy-like
-  return SDL_DisplayFormat(IMG_Load(name));  
+  return IMG_Load(name); //SDL_DisplayFormat(IMG_Load(name));  
 };
 
 void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor){

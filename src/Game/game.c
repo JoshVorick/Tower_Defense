@@ -22,15 +22,11 @@ void initGame(Game *game){
   game->towers = NULL;
   game->enemies = NULL;
 
-  game->sprites[gGRID_TILE].image = loadImage("img/Grid.png");
+  game->sprites[gGRID_TILE].image = loadImage("img/Grid_Tile.png");
   game->sprites[gALIEN1].image = loadImage("img/Alien1.png");
   game->sprites[gALIEN2].image = loadImage("img/Alien2.png");
   game->sprites[gBLUE1].image = loadImage("img/Blue1.png");
-  game->sprites[gBLUE2].image = loadImage("img/Blue2.png");
-  game->sprites[gBLUE3].image = loadImage("img/Blue3.png");
   game->sprites[gGREEN1].image = loadImage("img/Green1.png");
-  game->sprites[gGREEN2].image = loadImage("img/Green2.png");
-  game->sprites[gGREEN3].image = loadImage("img/Green3.png");
   game->sprites[gBACKGROUND].image = loadImage("img/GameBackground.png");
 
   game->font = TTF_OpenFont("fonts/blackWolf.ttf", 16);

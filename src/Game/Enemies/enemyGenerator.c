@@ -3,7 +3,7 @@
 extern void initEnemy(Enemy *enemy, int type, Grid_Tile *startGrid, Sprite sprites[]);
 
 void initEnemyGenerator(Game *game){
-  game->enemyGenerator.tBetweenEnemy = 15;
+  game->enemyGenerator.tBetweenEnemy = 50;
 };
 
 void addEnemies(Game *game){
