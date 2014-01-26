@@ -24,7 +24,8 @@ void updateTowers(Game *game){
     case gGREEN1:
       if(curTower->ticksSinceFired >= GREEN1_FIRERATE){
         Enemy *gonnaGetShot = findEnemyInRange(curTower->x + game->sprites[curTower->type].image->w/2, curTower->y + game->sprites[curTower->type].image->w/2,GREEN1_RANGE, game->enemies);
-        greenTowerShoot(gonnaGetShot, curTower->level);
+        if(gonnaGetShot != NULL)
+          greenTowerShoot(gonnaGetShot, curTower->level);
         curTower->ticksSinceFired = 0;
       }
       break;
@@ -35,23 +36,21 @@ void updateTowers(Game *game){
 };
 
 void addTower(Game *game, int towerType){
-  if(game->grid->selectedTile->myTower == NULL){  
-    Tower *newTower = malloc(sizeof(Tower));
-    newTower->x = game->grid->selectedTile->x;
-    newTower->y = game->grid->selectedTile->y;
-    newTower->health = 100;
-    newTower->barrelAngle = 0;
-    newTower->level = 1;
-    newTower->type = towerType;
-    newTower->kills = 0;
-    newTower->ticksSinceFired = 0;
+  Tower *newTower = malloc(sizeof(Tower));
+  newTower->x = game->grid->selectedTile->x;
+  newTower->y = game->grid->selectedTile->y;
+  newTower->health = 100;
+  newTower->barrelAngle = 0;
+  newTower->level = 1;
+  newTower->type = towerType;
+  newTower->kills = 0;
+  newTower->ticksSinceFired = 0;
     
-    game->grid->selectedTile->myTower = newTower;
+  game->grid->selectedTile->myTower = newTower;
     
-    //add to list of tower
-    newTower->nextTower = game->towers;
-    game->towers = newTower;
-  }
+  //add to list of tower
+  newTower->nextTower = game->towers;
+  game->towers = newTower;
 };
 
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy){

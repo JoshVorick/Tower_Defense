@@ -22,8 +22,36 @@ void getInputGame(Game *game){
             exit(0);
             break;
           case SDLK_SPACE:
-            //if selectedGrid.isEmpty == TRUE
-            addTower(game, gBLUE1);
+            if(game->grid->selectedTile->myTower == NULL)
+              addTower(game, gBLUE1);
+          case SDLK_RETURN://Enter key
+            if(game->grid->selectedTile->myTower == NULL)
+              addTower(game, gGREEN1);
+            break;
+          case SDLK_w:
+            if(game->grid->selectedTileY > 0){
+              game->grid->selectedTileY -= 1;
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            }
+            break;
+          case SDLK_a:
+            if(game->grid->selectedTileX > 0){
+              game->grid->selectedTileX -= 1;
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            }
+            break;
+          case SDLK_s:
+            if(game->grid->selectedTileY < game->grid->dimensionY-1){
+              game->grid->selectedTileY += 1;
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            }
+            break;
+          case SDLK_d:
+            if(game->grid->selectedTileX < game->grid->dimensionX-1){
+              game->grid->selectedTileX += 1;
+              game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTileX][game->grid->selectedTileY];
+            }
+            break;
           default:
             break;
         }

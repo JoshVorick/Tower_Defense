@@ -75,11 +75,11 @@ enum keys{
 #define GREEN1_FIRERATE 30
 #define GREEN2_FIRERATE 20
 #define GREEN3_FIRERATE 20
-#define GREEN1_DMG 5
-#define GREEN2_DMG 5
-#define GREEN3_DMG 5
-#define GREEN1_RANGE 30
-#define GREEN2_RANGE 30
-#define GREEN3_RANGE 35
+#define GREEN1_DMG 15
+#define GREEN2_DMG 15
+#define GREEN3_DMG 15
+#define GREEN1_RANGE 300
+#define GREEN2_RANGE 300
+#define GREEN3_RANGE 350
 
 #define ENEMY1_SPEED 0.30

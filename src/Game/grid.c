@@ -15,9 +15,11 @@ void initGrid(Grid* grid, int x, int y){
         grid->tiles[i][j].dirToNextInPath = DOWN;
       }
     }
+  grid->selectedTileX = 0;
+  grid->selectedTileY = 0;
+  grid->selectedTile = &grid->tiles[grid->selectedTileX][grid->selectedTileY];
 
   //Add a path to some tiles to test path-following code
-  grid->selectedTile = &grid->tiles[0][0];
   grid->tiles[3][0].nextInPath = &grid->tiles[4][0];
   grid->tiles[3][0].dirToNextInPath = RIGHT;
   grid->tiles[4][1].nextInPath = &grid->tiles[4][1];

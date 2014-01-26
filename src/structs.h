@@ -32,7 +32,7 @@ typedef struct Grid_Tile{
 typedef struct Grid{
   Grid_Tile **tiles;
   Grid_Tile *selectedTile;
-  int dimensionX, dimensionY;
+  int dimensionX, dimensionY, selectedTileX, selectedTileY;
 }Grid;
 
 typedef struct Enemy{
