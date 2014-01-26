@@ -16,7 +16,9 @@ enum startMenuSprites{
 
 #define NUM_SPRITES_GAME 9
 #define NUM_SOUNDS_GAME 0
- 
+#define NUM_TOWERS 2
+#define NUM_ENEMIES 2
+
 enum gameSprites{
   gBACKGROUND,
   gGRID_TILE,
@@ -54,15 +56,15 @@ enum keys{
 #define BLUE1_SELL 18
 #define BLUE2_SELL 35
 #define BLUE3_SELL 48
-#define BLUE1_FIRERATE 250 
-#define BLUE2_FIRERATE 240
-#define BLUE3_FIRERATE 230
+#define BLUE1_FIRERATE 180 
+#define BLUE2_FIRERATE 165
+#define BLUE3_FIRERATE 150
 #define BLUE1_DMG 15 
 #define BLUE2_DMG 18
 #define BLUE3_DMG 25
-#define BLUE1_RANGE 750
-#define BLUE2_RANGE 800
-#define BLUE3_RANGE 850
+#define BLUE1_RANGE 250
+#define BLUE2_RANGE 250
+#define BLUE3_RANGE 250
 
 #define GREEN1_PRICE 15
 #define GREEN2_PRICE 10
@@ -80,4 +82,4 @@ enum keys{
 #define GREEN2_RANGE 30
 #define GREEN3_RANGE 35
 
-#define ENEMY1_SPEED 0.15
+#define ENEMY1_SPEED 0.30

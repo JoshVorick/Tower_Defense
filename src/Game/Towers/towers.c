@@ -23,7 +23,7 @@ void updateTowers(Game *game){
    
     case gGREEN1:
       if(curTower->ticksSinceFired >= GREEN1_FIRERATE){
-        Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y,GREEN1_RANGE, game->enemies);
+        Enemy *gonnaGetShot = findEnemyInRange(curTower->x + game->sprites[curTower->type].image->w/2, curTower->y + game->sprites[curTower->type].image->w/2,GREEN1_RANGE, game->enemies);
         greenTowerShoot(gonnaGetShot, curTower->level);
         curTower->ticksSinceFired = 0;
       }
@@ -35,20 +35,7 @@ void updateTowers(Game *game){
 };
 
 void addTower(Game *game, int towerType){
-  int areAllFourEmpty = FALSE; //checks if all four blocks tower will go on are blank
-  int i,j;
-  for(i=0; i < game->grid->dimensionX-1; i++){ //-1 because edge blocks won't work
-    for(j=0;j < game->grid->dimensionY-1; j++){
-      if(game->grid->selectedTile == &game->grid->tiles[i][j])
-        if(game->grid->tiles[i][j].hasTower == FALSE &&
-            game->grid->tiles[i+1][j].hasTower == FALSE &&
-            game->grid->tiles[i][j+1].hasTower == FALSE &&
-            game->grid->tiles[i+1][j+1].hasTower == FALSE){
-          areAllFourEmpty = TRUE;
-        }
-    }
-  }
-  if(areAllFourEmpty){  
+  if(game->grid->selectedTile->myTower == NULL){  
     Tower *newTower = malloc(sizeof(Tower));
     newTower->x = game->grid->selectedTile->x;
     newTower->y = game->grid->selectedTile->y;
@@ -58,6 +45,10 @@ void addTower(Game *game, int towerType){
     newTower->type = towerType;
     newTower->kills = 0;
     newTower->ticksSinceFired = 0;
+    
+    game->grid->selectedTile->myTower = newTower;
+    
+    //add to list of tower
     newTower->nextTower = game->towers;
     game->towers = newTower;
   }

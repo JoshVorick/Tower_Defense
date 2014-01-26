@@ -6,11 +6,22 @@ void initGrid(Grid* grid, int x, int y){
     for(j=0; j<grid->dimensionY; j++){
       grid->tiles[i][j].x = x + i*50;
       grid->tiles[i][j].y = y + j*50;
-      grid->tiles[i][j].hasTower = FALSE;
-      if(j < grid->dimensionY - 1)  
+      grid->tiles[i][j].myTower = NULL;
+      if(j < grid->dimensionY - 1){ 
         grid->tiles[i][j].nextInPath = &grid->tiles[i][j+1];
-      else
+        grid->tiles[i][j].dirToNextInPath = DOWN;
+      }else{
         grid->tiles[i][j].nextInPath = NULL;
+        grid->tiles[i][j].dirToNextInPath = DOWN;
+      }
     }
+
+  //Add a path to some tiles to test path-following code
   grid->selectedTile = &grid->tiles[0][0];
+  grid->tiles[3][0].nextInPath = &grid->tiles[4][0];
+  grid->tiles[3][0].dirToNextInPath = RIGHT;
+  grid->tiles[4][1].nextInPath = &grid->tiles[4][1];
+  grid->tiles[4][0].dirToNextInPath = DOWN;
+  grid->tiles[4][1].nextInPath = &grid->tiles[3][1];
+  grid->tiles[4][1].dirToNextInPath = LEFT;
 };

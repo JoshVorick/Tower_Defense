@@ -1,8 +1,8 @@
 #include "enemies.h"
 
-void initEnemy(Enemy *enemy, int type, Grid_Tile *startGrid){
-  enemy->x = startGrid->x;
-  enemy->y = startGrid->y;
+void initEnemy(Enemy *enemy, int type, Grid_Tile *startGrid, Sprite sprites[]){
+  enemy->x = startGrid->x - sprites[type].image->w/2 + sprites[gGRID_TILE].image->w/2;
+  enemy->y = startGrid->y - sprites[type].image->h/2;
   enemy->health = 10;
   enemy->type = type;
   enemy->dir = DOWN;
@@ -18,31 +18,57 @@ void updateEnemies(Game *game){
     if(curEnemy->health <= 0){
       game->score += 10;
       Enemy *temp = curEnemy;
-      if(prevEnemy != NULL){
+      if(prevEnemy != NULL){//If cruEnemy is not first in list
         prevEnemy->nextEnemy = curEnemy->nextEnemy;
-        curEnemy = curEnemy->nextEnemy; //This makes it so it iterates to the next enemy correctly
-      }else{
+        curEnemy = curEnemy->nextEnemy; //iterate to next enemy
+      }else{//If curEnemy IS first in list
         game->enemies = curEnemy->nextEnemy;
-        curEnemy = curEnemy->nextEnemy;
+        curEnemy = curEnemy->nextEnemy;//iterate to next enemy
       }
       free(temp);
       printf("BAM!!!! \n");
     }else{
-     //Move the enemy
+      //If Enemy reached the end, confuse it for now
+      if(curEnemy->myGrid == NULL)
+        curEnemy->myGrid = &game->grid->tiles[3][0];
+
+      //Move the enemy
       switch(curEnemy->dir){
       case LEFT:
-        curEnemy->x += ENEMY1_SPEED;
+        curEnemy->x -= ENEMY1_SPEED;
+        //If its reached middle of grid, start moving towards next grid in path 
+        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 <= curEnemy->myGrid->x + game->sprites[gGRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
+          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        }
         break;
       case RIGHT:
-        curEnemy->x -= ENEMY1_SPEED;
+        curEnemy->x += ENEMY1_SPEED;
+        //If its reached middle of grid, start moving towards next grid in path 
+        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 >= curEnemy->myGrid->x + game->sprites[gGRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
+          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        }
         break;
       case UP:
         curEnemy->y -= ENEMY1_SPEED;
+        //If its reached middle of grid, start moving towards next grid in path 
+        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 <= curEnemy->myGrid->y + game->sprites[gGRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
+          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        }
         break;
       case DOWN:
         curEnemy->y += ENEMY1_SPEED;
+        //If its reached middle of grid, start moving towards next grid in path 
+        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 >= curEnemy->myGrid->y + game->sprites[gGRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
+          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        }
         break;
       }
+
+      //iterate to next enemy
       prevEnemy = curEnemy;
       curEnemy = curEnemy->nextEnemy;
     }

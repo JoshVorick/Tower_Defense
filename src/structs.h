@@ -16,10 +16,17 @@ typedef struct StartMenu{
   TTF_Font *font;
 } StartMenu;
 
+typedef struct Tower{
+  int level, kills, type, ticksSinceFired;
+  float x, y, health, barrelAngle; 
+  struct Tower *nextTower;
+  /*width, cost, dmg, fireRate, sellPrice, etc will be constants in defs.h*/
+} Tower;
+
 typedef struct Grid_Tile{
-  int x, y, hasTower;
+  int x, y, dirToNextInPath;
+  Tower *myTower; //pointer to the tower on this grid
   struct Grid_Tile *nextInPath; //points to next tile enemies will take
-  /*width of each tile stored as constants in defs.h*/
 } Grid_Tile;
 
 typedef struct Grid{
@@ -27,13 +34,6 @@ typedef struct Grid{
   Grid_Tile *selectedTile;
   int dimensionX, dimensionY;
 }Grid;
-
-typedef struct Tower{
-  int level, kills, type, ticksSinceFired;
-  float x, y, health, barrelAngle; 
-  struct Tower *nextTower;
-  /*width, cost, dmg, fireRate, sellPrice, etc will be constants in defs.h*/
-} Tower;
 
 typedef struct Enemy{
   float x, y, health;
