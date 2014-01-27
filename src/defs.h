@@ -14,7 +14,7 @@ enum startMenuSprites{
   sBACKGROUND
 };
 
-#define NUM_SPRITES_GAME 9
+#define NUM_SPRITES_GAME 6 
 #define NUM_SOUNDS_GAME 0
 #define NUM_TOWERS 2
 #define NUM_ENEMIES 2
@@ -49,13 +49,13 @@ enum keys{
 #define BLUE1_PRICE 25
 #define BLUE1_SELL 18
 #define BLUE1_FIRERATE 600 
-#define BLUE1_DMG 0 
+#define BLUE1_DMG 1 
 #define BLUE1_RANGE 250
 
 #define GREEN1_PRICE 15
 #define GREEN1_SELL 10
 #define GREEN1_FIRERATE 230
-#define GREEN1_DMG 0 
+#define GREEN1_DMG 1 
 #define GREEN1_RANGE 300
 
-#define ENEMY1_SPEED 0.30
+#define ENEMY1_SPEED 1.20

@@ -10,6 +10,7 @@ extern void closeFont(TTF_Font *);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
 extern SDL_Surface *loadImage(char *name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
+extern void freeGrid(Grid *grid);
 
 void initGame(Game *game){
   game->totalTime = 0;
@@ -41,10 +42,6 @@ void initGame(Game *game){
   game->grid->dimensionX = 7;
   game->grid->dimensionY = 12;
   game->grid->tiles = (Grid_Tile**)malloc(game->grid->dimensionX*sizeof(Grid_Tile));
-  int i;
-  for(i=0; i<game->grid->dimensionX; i++)
-    game->grid->tiles[i] = (Grid_Tile*)malloc(game->grid->dimensionY*sizeof(Grid_Tile));
-
   initGrid(game->grid, 75, 50);
 };
 
@@ -82,19 +79,36 @@ void drawGame(Game *game){
   SDL_FillRect(screen, &rect, SDL_MapRGBA(game->sprites[gALIEN1].image->format,100,100,100,255));
   
   char str[20];
-  sprintf(str, "PRESS ESC TO EXIT %d", game->score);
+  sprintf(str, "Press M to go to menu. Score: %d", game->score);
   
-  drawString(str, 0, 0, game->font, 1, 1, game->fontColor, game->fontBGColor);
+  drawString(str, 0, 15, game->font, 1, 0, game->fontColor, game->fontBGColor);
   
   SDL_Flip(screen);
 };
 
 void freeGame(Game* game){
-  //free game variables
-  free(game->input);
-  TTF_CloseFont(game->font);
   int i;
   for(i=0; i<NUM_SPRITES_GAME; i++)
-    if(game->sprites != NULL)
+    if(game->sprites[i].image != NULL)
       SDL_FreeSurface(game->sprites[i].image);
+  
+  free(game->input);
+  freeGrid(game->grid);
+  TTF_CloseFont(game->font);
+
+  Enemy *curEnemy = game->enemies;
+  Enemy *tempE;
+  while(curEnemy != NULL){
+    tempE = curEnemy;
+    curEnemy = curEnemy->nextEnemy;
+    free(tempE);
+  }
+  
+  Tower *curTower = game->towers;
+  Tower *tempT;
+  while(curTower != NULL){
+    tempT = curTower;
+    curTower = curTower->nextTower;
+    free(tempT);
+  }
 };

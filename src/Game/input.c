@@ -3,6 +3,7 @@
 extern void addTower(Game *game, int towerType);
 extern void wouldBlockPath(Grid *grid);
 extern void findPath(Grid *grid);
+extern void freeGame(Game *game);
 
 void initInputGame(Game *game){
   int i;
@@ -16,19 +17,25 @@ void getInputGame(Game *game){
   while(SDL_PollEvent(&event)){
     switch(event.type){
       case SDL_QUIT:
+        freeGame(game);
         exit(0);
         break;
       case SDL_KEYDOWN:
         switch(event.key.keysym.sym){
           case SDLK_ESCAPE:
+            freeGame(game);
             exit(0);
             break;
           case SDLK_SPACE:
-            if(game->grid->blocksPath == FALSE)
+            if(game->grid->blocksPath == FALSE){
               addTower(game, gBLUE1);
+              findPath(game->grid);
+            }
           case SDLK_RETURN://Enter key
-            if(game->grid->blocksPath == FALSE)
+            if(game->grid->blocksPath == FALSE){
               addTower(game, gGREEN1);
+              findPath(game->grid);
+            }
             break;
           case SDLK_w:
             if(game->grid->selectedTile->j > 0){

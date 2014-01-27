@@ -21,11 +21,17 @@ int findPath(Grid *grid){
       grid->tiles[i][j].next = NULL;
     } 
   
-  Grid_Tile *pathless = grid->endTile; //used to iterate through tiles
+  Grid_Tile *pathless; //used to iterate through tiles
+  if(grid->endTile->myTower == NULL)
+    pathless = grid->endTile; //start at end tile 
+  else
+    pathless = NULL;
+
   while(pathless != NULL){
     Grid_Tile *curTile = pathless;
     Grid_Tile *prevTile = pathless; //used to remove tiles 
     while(curTile != NULL){
+      
       //add path to left tile
       if(curTile->i > 0 && grid->tiles[curTile->i-1][curTile->j].nextInPath == NULL && grid->tiles[curTile->i-1][curTile->j].myTower == NULL){
         grid->tiles[curTile->i-1][curTile->j].nextInPath = curTile;
@@ -35,6 +41,7 @@ int findPath(Grid *grid){
         grid->tiles[curTile->i-1][curTile->j].next = pathless;
         pathless = &grid->tiles[curTile->i-1][curTile->j];
       }
+      
       //add path to right tile
       if(curTile->i < grid->dimensionX - 1 && grid->tiles[curTile->i+1][curTile->j].nextInPath == NULL && grid->tiles[curTile->i+1][curTile->j].myTower == NULL){
         grid->tiles[curTile->i+1][curTile->j].nextInPath = curTile;
@@ -44,6 +51,7 @@ int findPath(Grid *grid){
         grid->tiles[curTile->i+1][curTile->j].next = pathless;
         pathless = &grid->tiles[curTile->i+1][curTile->j];
       }
+      
       //add path to top tile
       if(curTile->j > 0 && grid->tiles[curTile->i][curTile->j-1].nextInPath == NULL && grid->tiles[curTile->i][curTile->j-1].myTower == NULL){
         grid->tiles[curTile->i][curTile->j-1].nextInPath = curTile;
@@ -53,6 +61,7 @@ int findPath(Grid *grid){
         grid->tiles[curTile->i][curTile->j-1].next = pathless;
         pathless = &grid->tiles[curTile->i][curTile->j-1];
       }
+      
       //add path to bottom tile
       if(curTile->j < grid->dimensionY-1 && grid->tiles[curTile->i][curTile->j+1].nextInPath == NULL && grid->tiles[curTile->i][curTile->j+1].myTower == NULL){
         grid->tiles[curTile->i][curTile->j+1].nextInPath = curTile;
@@ -65,18 +74,18 @@ int findPath(Grid *grid){
       //iterate to next tile and remove this one
       curTile = curTile->next;
     }
-    if(prevTile != NULL){
-      curTile = pathless;
-      while(curTile->next != prevTile && curTile->next != NULL){
-        curTile = curTile->next;
-      }
-      if(curTile->next == NULL)
-        pathless = NULL;
-      else
-        curTile->next = NULL;
+
+    //remove tiles that have been iterated through already
+    curTile = pathless;
+    while(curTile->next != prevTile && curTile->next != NULL){
+      curTile = curTile->next;
     }
+    if(curTile->next == NULL)
+      pathless = NULL;
+    else
+      curTile->next = NULL;
   } 
-  return TRUE; 
+  return grid->startTile->nextInPath != NULL; 
 };
 
 //calculates if adding a tower to 'selectedGrid' would block path
