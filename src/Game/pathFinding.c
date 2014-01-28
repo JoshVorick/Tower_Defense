@@ -8,11 +8,15 @@ findPath-
   starting at the tile next to the exit, and then iterating out to its adjacent
   tiles and having them point back to the tile before them until every
   unoccupied tile has an 'arrow'
+
+  time to find optimal path to exit from every tile on a grid of 4,000,000 tiles: 0.651 - 0.654 seconds
 */
 #include "pathFinding.h"
 
 //calculate the path. Return TRUE if there is one, FALSE if there isn't one
 int findPath(Grid *grid){
+  int startTicks = SDL_GetTicks();//to find start time
+  
   int i,j;
   for(i=0;i<grid->dimensionX; i++)
     for(j=0;j<grid->dimensionY; j++){
@@ -85,6 +89,8 @@ int findPath(Grid *grid){
     else
       curTile->next = NULL;
   } 
+  printf("ticks used to calculate path: %i \n",SDL_GetTicks()-startTicks); //to get end time
+
   return grid->startTile->nextInPath != NULL; 
 };
 
