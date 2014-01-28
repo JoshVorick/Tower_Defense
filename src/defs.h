@@ -22,8 +22,8 @@ enum startMenuSprites{
 enum gameSprites{
   gBACKGROUND,
   gGRID_TILE,
-  gALIEN1,
-  gALIEN2,
+  gENEMY1,
+  gENEMY2,
   gBLUE1,
   gGREEN1,
 };
@@ -49,13 +49,21 @@ enum keys{
 #define BLUE1_PRICE 25
 #define BLUE1_SELL 18
 #define BLUE1_FIRERATE 600 
-#define BLUE1_DMG 1 
-#define BLUE1_RANGE 250
+#define BLUE1_DMG 15 
+#define BLUE1_RANGE 450
 
 #define GREEN1_PRICE 15
-#define GREEN1_SELL 10
+#define GREEN1_SELL 18
 #define GREEN1_FIRERATE 230
-#define GREEN1_DMG 1 
+#define GREEN1_DMG 5 
 #define GREEN1_RANGE 300
 
-#define ENEMY1_SPEED 1.20
+#define ENEMY1_SPEED 0.4
+#define ENEMY1_HEALTH 100
+#define ENEMY1_GOLD 5
+#define ENEMY1_SCORE 100
+
+#define ENEMY2_SPEED 0.2
+#define ENEMY2_HEALTH 200
+#define ENEMY2_GOLD 8
+#define ENEMY2_SCORE 1540

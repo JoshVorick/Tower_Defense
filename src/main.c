@@ -1,7 +1,7 @@
 /*
 Some silly Tower Defense game I decided to start
 Right now it sucks, I'll be honest.
-Really not worth playing.
+Really not worth playing, guess its kinda fun maybe?
 */
 
 #include "main.h"
@@ -56,9 +56,11 @@ int main(void){
       drawGame(game);
 
       unsigned int ticks = SDL_GetTicks();
+      //printf("ticks since last frame: %i \n", ticks - fpsLimit);
       if(ticks < fpsLimit)
-         SDL_Delay(fpsLimit - ticks);
+        SDL_Delay(fpsLimit - ticks);
       fpsLimit = SDL_GetTicks() + 16;
+      //printf("ticks since last frame: %i \n", ticks - fpsLimit);
     }
 
     freeGame(game);

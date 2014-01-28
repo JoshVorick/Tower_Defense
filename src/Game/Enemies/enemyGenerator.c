@@ -9,7 +9,7 @@ void initEnemyGenerator(Game *game){
 void addEnemies(Game *game){
   if(game->levelTime % game->enemyGenerator.tBetweenEnemy == 0){
     Enemy *newEnemy = malloc(sizeof(Enemy));
-    initEnemy(newEnemy,gALIEN1 + rand()%NUM_ENEMIES, &game->grid->tiles[3][0], game->sprites);
+    initEnemy(newEnemy,gENEMY1 + rand()%NUM_ENEMIES, &game->grid->tiles[3][0], game->sprites);
     
     //add new enemy to end of list
     if(game->enemies == NULL)

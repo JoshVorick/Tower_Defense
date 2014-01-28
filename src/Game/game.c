@@ -24,8 +24,8 @@ void initGame(Game *game){
   game->enemies = NULL;
 
   game->sprites[gGRID_TILE].image = loadImage("img/Grid_Tile.png");
-  game->sprites[gALIEN1].image = loadImage("img/Alien1.png");
-  game->sprites[gALIEN2].image = loadImage("img/Alien2.png");
+  game->sprites[gENEMY1].image = loadImage("img/Alien1.png");
+  game->sprites[gENEMY2].image = loadImage("img/Alien2.png");
   game->sprites[gBLUE1].image = loadImage("img/Blue1.png");
   game->sprites[gGREEN1].image = loadImage("img/Green1.png");
   game->sprites[gBACKGROUND].image = loadImage("img/GameBackground.png");
@@ -59,6 +59,7 @@ void drawGame(Game *game){
   drawImage(game->sprites[gBACKGROUND].image, 0, 0);
   
   int i,j;
+  
   for(i=0; i < game->grid->dimensionX; i++)
     for(j=0; j < game->grid->dimensionY; j++)
       drawImage(game->sprites[gGRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
@@ -72,11 +73,15 @@ void drawGame(Game *game){
   Enemy *curEnemy = game->enemies;
   while(curEnemy != NULL){
     drawImage(game->sprites[curEnemy->type].image, curEnemy->x, curEnemy->y);
-    curEnemy = curEnemy->nextEnemy;
+    SDL_Rect rect = {curEnemy->x, curEnemy->y, game->sprites[curEnemy->type].image->w, 4};
+   SDL_FillRect(screen, &rect, 0xAAAAAA);
+   rect.w = game->sprites[curEnemy->type].image->w * curEnemy->health / curEnemy->maxHealth;
+   SDL_FillRect(screen, &rect, 0xFF0000);
+   curEnemy = curEnemy->nextEnemy;
   }
 
   SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
-  SDL_FillRect(screen, &rect, SDL_MapRGBA(game->sprites[gALIEN1].image->format,100,100,100,255));
+  SDL_FillRect(screen, &rect, SDL_MapRGBA(game->sprites[gENEMY1].image->format,100,100,100,255));
   
   char str[20];
   sprintf(str, "Press M to go to menu. Score: %d", game->score);

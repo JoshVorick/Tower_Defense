@@ -38,13 +38,13 @@ typedef struct Grid{
 }Grid;
 
 typedef struct Enemy{
-  float x, y, health;
-  int type, dir; /*Direction enemy is walking in*/
+  float x, y, speed;
+  int type, health, maxHealth, dir; /*Direction enemy is walking in*/
   Grid_Tile *myGrid;
   struct Enemy *nextEnemy;
   /*width, goldForKilling, totalHealth, speed stored as constants in defs.h 
-  Something about its path/pathfinding (pointer to struct/var with its path?)
-  */
+    Something about its path/pathfinding (pointer to struct/var with its path?)
+    */
 } Enemy;
 
 typedef struct EnemyGenerator{
