@@ -17,10 +17,14 @@ void initGame(Game *game){
   game->levelTime = 0;
   game->inGame = TRUE;
   game->score = 0;
+  game->selectedTowerType = gBLUE1;
   game->rStored = 300;
   game->gStored = 300;
   game->bStored = 300;
-  game->input = malloc(sizeof(Input));
+  game->rRatio = 100;
+  game->gRatio = 100;
+  game->bRatio = 100;
+
   initInputGame(game);
   initEnemyGenerator(game);
   game->towers = NULL;
@@ -88,15 +92,20 @@ void drawGame(Game *game){
   
   char str[20];
   sprintf(str, "Press M to go to menu. Score: %d", game->score);
-  drawString(str, 0, 15, game->font, 1, 0, game->fontColor, game->fontBGColor);
+  drawString(str, 0, 650, game->font, 1, 0, game->fontColor, game->fontBGColor);
   sprintf(str, "Red: %i", game->rStored);
-  drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  drawString(str, 0, 20, game->font, 0, 0, game->fontColor, game->fontBGColor);
   sprintf(str, "Green: %i", game->gStored);
-  drawString(str, 0, 25, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  drawString(str, 0, 40, game->font, 0, 0, game->fontColor, game->fontBGColor);
   sprintf(str, "Blue: %i", game->bStored);
-  drawString(str, 0, 50, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  drawString(str, 0, 60, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  sprintf(str, "R:G:B =  %i, %i, %i", game->rRatio, game->gRatio, game->bRatio);
+  drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
   
-
+  int total = (game->rRatio + game->gRatio + game->bRatio) / 100.0;
+  sprintf(str, "Cost for selected Tower: %i,%i,%i", game->rRatio/total, game->gRatio/total, game->bRatio/total);
+  drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  
   SDL_Flip(screen);
 };
 
@@ -106,7 +115,6 @@ void freeGame(Game* game){
     if(game->sprites[i].image != NULL)
       SDL_FreeSurface(game->sprites[i].image);
   
-  free(game->input);
   freeGrid(game->grid);
   TTF_CloseFont(game->font);
 

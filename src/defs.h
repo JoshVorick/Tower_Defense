@@ -28,21 +28,12 @@ enum gameSprites{
   gGREEN1,
 };
 
-#define NUM_KEYS_GAME 10//keys 0-3 are for movement
-                        //keys 4 is for selecton (enter/space)
-                        // key 5-8 are undefined*/
-                        // key 9 is for any other random key
-enum keys{
-  UP,
-  DOWN,
+enum directions{
   LEFT,
-  RIGHT,
-  SELECT,
-  PAUSE,
-  MENU,
-  OTHER_KEY
+  DOWN,
+  UP,
+  RIGHT
 };
-
 #define FALSE 0
 #define TRUE 1
 
@@ -60,7 +51,6 @@ enum keys{
 
 #define ENEMY1_SPEED 0.4
 #define ENEMY1_HEALTH 100
-#define ENEMY1_GOLD 5
 #define ENEMY1_SCORE 100
 #define ENEMY1_R 10
 #define ENEMY1_G 5
@@ -68,8 +58,7 @@ enum keys{
 
 #define ENEMY2_SPEED 0.2
 #define ENEMY2_HEALTH 200
-#define ENEMY2_GOLD 8
 #define ENEMY2_SCORE 150
 #define ENEMY2_R 15
 #define ENEMY2_G 20
-#define ENEMY2_B 5
+#define ENEMY2_B 10

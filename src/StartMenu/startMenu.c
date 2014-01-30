@@ -8,7 +8,6 @@ extern void drawImage(SDL_Surface *surface, int x, int y);
 void initStartMenu(StartMenu *startMenu){
   //assign variables
   startMenu->atStartMenu = TRUE;
-  startMenu->input = malloc(sizeof(Input));
   initInputStartMenu(startMenu);
   startMenu->font = TTF_OpenFont("fonts/blackWolf.ttf", 16);  
   startMenu->fontColor.r = 55;
@@ -37,6 +36,8 @@ void drawStartMenu(StartMenu *startMenu){
 
 void freeStartMenu(StartMenu *startMenu){
   //Set the variables free!!
-  free(startMenu->input);
   TTF_CloseFont(startMenu->font);
+  int i;
+  for(i=0;i<NUM_SPRITES_STARTMENU;i++)
+    SDL_FreeSurface(startMenu->sprites[i].image);
 };

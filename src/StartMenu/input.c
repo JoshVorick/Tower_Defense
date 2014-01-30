@@ -3,9 +3,6 @@
 extern void freeStartMenu(StartMenu *startMenu);
 
 void initInputStartMenu(StartMenu *startMenu){
-  int i;
-  for(i=0; i<NUM_KEYS_STARTMENU; i++)
-    startMenu->input->keys[i] = FALSE;
 };
 
 void getInputStartMenu(StartMenu *startMenu){

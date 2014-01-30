@@ -1,9 +1,5 @@
 #include "defs.h"
 
-typedef struct Input{
-  int keys[100];
-} Input;
-
 typedef struct Sprite{
   SDL_Surface *image;
 } Sprite;
@@ -12,7 +8,6 @@ typedef struct StartMenu{
   int atStartMenu;
   Sprite sprites[NUM_SPRITES_STARTMENU];
   SDL_Color fontColor, fontBGColor;
-  Input *input;
   TTF_Font *font;
 } StartMenu;
 
@@ -53,11 +48,11 @@ typedef struct EnemyGenerator{
 }EnemyGenerator;
 
 typedef struct Game{
-  int totalTime, levelTime, inGame, score;
+  int totalTime, levelTime, inGame, score, selectedTowerType;
   int rStored, gStored, bStored; //RGB resources for buying towers
+  int rRatio, gRatio, bRatio; //Ratio of R:G:B to be used when next tower is bought
   Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
-  Input *input;
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
   Enemy *enemies;

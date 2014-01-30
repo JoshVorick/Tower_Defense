@@ -6,9 +6,6 @@ extern void findPath(Grid *grid);
 extern void freeGame(Game *game);
 
 void initInputGame(Game *game){
-  int i;
-  for(i=0; i<NUM_KEYS_GAME; i++)
-    game->input->keys[i] = FALSE;
 };
 
 void getInputGame(Game *game){
@@ -26,17 +23,23 @@ void getInputGame(Game *game){
             freeGame(game);
             exit(0);
             break;
-          
-          case SDLK_SPACE:
-            if(addTower(game, gBLUE1) == TRUE)//returns true if tower was added
-              findPath(game->grid);
+          case SDLK_m:
+            game->inGame = FALSE;
             break;
-          case SDLK_RETURN://Enter key
-            if(addTower(game, gGREEN1) == TRUE)
+          
+          case SDLK_1:
+            game->selectedTowerType = gBLUE1;
+            break;
+          case SDLK_2:
+            game->selectedTowerType = gGREEN1;
+            break;
+
+          case SDLK_SPACE:
+            if(addTower(game, game->selectedTowerType) == TRUE)//returns true if tower was added
               findPath(game->grid);
             break;
 
-          case SDLK_w:
+          case SDLK_k:
             if(game->grid->selectedTile->j > 0){
               //move selectedTile
               game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i][game->grid->selectedTile->j-1];
@@ -44,7 +47,7 @@ void getInputGame(Game *game){
               wouldBlockPath(game->grid);
             }
             break;
-          case SDLK_a:
+          case SDLK_h:
             if(game->grid->selectedTile->i > 0){
               //move selectedTile
               game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i-1][game->grid->selectedTile->j];
@@ -52,7 +55,7 @@ void getInputGame(Game *game){
               wouldBlockPath(game->grid);
             }
             break;
-          case SDLK_s:
+          case SDLK_j:
             if(game->grid->selectedTile->j < game->grid->dimensionY-1){
               //move selectedTile
               game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i][game->grid->selectedTile->j + 1];
@@ -60,7 +63,7 @@ void getInputGame(Game *game){
               wouldBlockPath(game->grid);
             }
             break;
-          case SDLK_d:
+          case SDLK_l:
             if(game->grid->selectedTile->i < game->grid->dimensionX-1){
               //move selectedTile
               game->grid->selectedTile = &game->grid->tiles[game->grid->selectedTile->i+1][game->grid->selectedTile->j];
@@ -72,7 +75,6 @@ void getInputGame(Game *game){
           default:
             break;
         }
-        game->input->keys[NUM_KEYS_GAME - 1] = TRUE;
         break;
     }
   }
