@@ -35,7 +35,16 @@ void updateTowers(Game *game){
   }
 };
 
-void addTower(Game *game, int towerType){
+int addTower(Game *game, int towerType){
+  if(game->grid->blocksPath == TRUE)
+    return FALSE;
+  if(game->rStored < 100 || game->gStored < 100 || game->bStored < 100)
+    return FALSE;
+  
+  game->rStored -= 100;
+  game->gStored -= 100;
+  game->bStored -= 100;
+
   Tower *newTower = malloc(sizeof(Tower));
   newTower->x = game->grid->selectedTile->x;
   newTower->y = game->grid->selectedTile->y;
@@ -51,6 +60,8 @@ void addTower(Game *game, int towerType){
   //add to list of tower
   newTower->nextTower = game->towers;
   game->towers = newTower;
+
+  return TRUE;
 };
 
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy){

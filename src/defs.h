@@ -48,13 +48,13 @@ enum keys{
 
 #define BLUE1_PRICE 25
 #define BLUE1_SELL 18
-#define BLUE1_FIRERATE 600 
+#define BLUE1_FIRERATE 100 
 #define BLUE1_DMG 15 
 #define BLUE1_RANGE 450
 
 #define GREEN1_PRICE 15
 #define GREEN1_SELL 18
-#define GREEN1_FIRERATE 230
+#define GREEN1_FIRERATE 30
 #define GREEN1_DMG 5 
 #define GREEN1_RANGE 300
 
@@ -62,8 +62,14 @@ enum keys{
 #define ENEMY1_HEALTH 100
 #define ENEMY1_GOLD 5
 #define ENEMY1_SCORE 100
+#define ENEMY1_R 10
+#define ENEMY1_G 5
+#define ENEMY1_B 15
 
 #define ENEMY2_SPEED 0.2
 #define ENEMY2_HEALTH 200
 #define ENEMY2_GOLD 8
-#define ENEMY2_SCORE 1540
+#define ENEMY2_SCORE 150
+#define ENEMY2_R 15
+#define ENEMY2_G 20
+#define ENEMY2_B 5

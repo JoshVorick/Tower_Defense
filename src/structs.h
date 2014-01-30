@@ -39,7 +39,8 @@ typedef struct Grid{
 
 typedef struct Enemy{
   float x, y, speed;
-  int type, health, maxHealth, dir; /*Direction enemy is walking in*/
+  int type, health, maxHealth, score, dir; /*Direction enemy is walking in*/
+  SDL_Color color;
   Grid_Tile *myGrid;
   struct Enemy *nextEnemy;
   /*width, goldForKilling, totalHealth, speed stored as constants in defs.h 
@@ -53,6 +54,7 @@ typedef struct EnemyGenerator{
 
 typedef struct Game{
   int totalTime, levelTime, inGame, score;
+  int rStored, gStored, bStored; //RGB resources for buying towers
   Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
   Input *input;

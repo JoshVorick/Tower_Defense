@@ -13,11 +13,19 @@ void initEnemy(Enemy *enemy, int type, Grid_Tile *startGrid, Sprite sprites[]){
       enemy->speed = ENEMY1_SPEED;
       enemy->health = ENEMY1_HEALTH;
       enemy->maxHealth = ENEMY1_HEALTH;
+      enemy->score = ENEMY1_SCORE;
+      enemy->color.r = ENEMY1_R;
+      enemy->color.g = ENEMY1_G;
+      enemy->color.b = ENEMY1_B;
       break;
     case gENEMY2:
-      enemy->speed = ENEMY1_SPEED;
-      enemy->health = ENEMY1_HEALTH;
-      enemy->maxHealth = ENEMY1_HEALTH;
+      enemy->speed = ENEMY2_SPEED;
+      enemy->health = ENEMY2_HEALTH;
+      enemy->maxHealth = ENEMY2_HEALTH;
+      enemy->score = ENEMY2_SCORE;
+      enemy->color.r = ENEMY2_R;
+      enemy->color.g = ENEMY2_G;
+      enemy->color.b = ENEMY2_B;
       break;
     default:
       break;
@@ -30,7 +38,10 @@ void updateEnemies(Game *game){
   while(curEnemy != NULL){
     //Remove enemy if its dead, add to score
     if(curEnemy->health <= 0){
-      game->score += 10;
+      game->score += curEnemy->score;
+      game->rStored += curEnemy->color.r;
+      game->gStored += curEnemy->color.g;
+      game->bStored += curEnemy->color.b;
       Enemy *temp = curEnemy;
       if(prevEnemy != NULL){//If curEnemy is not first in list
         prevEnemy->nextEnemy = curEnemy->nextEnemy;

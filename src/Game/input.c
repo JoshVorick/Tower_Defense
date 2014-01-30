@@ -1,6 +1,6 @@
 #include "input.h"
 
-extern void addTower(Game *game, int towerType);
+extern int addTower(Game *game, int towerType);
 extern void wouldBlockPath(Grid *grid);
 extern void findPath(Grid *grid);
 extern void freeGame(Game *game);
@@ -26,17 +26,16 @@ void getInputGame(Game *game){
             freeGame(game);
             exit(0);
             break;
+          
           case SDLK_SPACE:
-            if(game->grid->blocksPath == FALSE){
-              addTower(game, gBLUE1);
+            if(addTower(game, gBLUE1) == TRUE)//returns true if tower was added
               findPath(game->grid);
-            }
-          case SDLK_RETURN://Enter key
-            if(game->grid->blocksPath == FALSE){
-              addTower(game, gGREEN1);
-              findPath(game->grid);
-            }
             break;
+          case SDLK_RETURN://Enter key
+            if(addTower(game, gGREEN1) == TRUE)
+              findPath(game->grid);
+            break;
+
           case SDLK_w:
             if(game->grid->selectedTile->j > 0){
               //move selectedTile
@@ -69,6 +68,7 @@ void getInputGame(Game *game){
               wouldBlockPath(game->grid);
             }
             break;
+
           default:
             break;
         }
