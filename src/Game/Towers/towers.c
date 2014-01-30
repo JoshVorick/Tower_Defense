@@ -38,12 +38,13 @@ void updateTowers(Game *game){
 int addTower(Game *game, int towerType){
   if(game->grid->blocksPath == TRUE)
     return FALSE;
-  if(game->rStored < 100 || game->gStored < 100 || game->bStored < 100)
+  double total = (game->rRatio + game->gRatio + game->bRatio)/300.0;
+  if(game->rStored < game->rRatio / total || game->gStored < game->gRatio/total || game->bStored < game->bRatio/total)
     return FALSE;
   
-  game->rStored -= 100;
-  game->gStored -= 100;
-  game->bStored -= 100;
+  game->rStored -= (int)(game->rRatio / total);
+  game->gStored -= (int)(game->gRatio / total);
+  game->bStored -= (int)(game->bRatio / total);
 
   Tower *newTower = malloc(sizeof(Tower));
   newTower->x = game->grid->selectedTile->x;

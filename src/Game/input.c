@@ -34,6 +34,31 @@ void getInputGame(Game *game){
             game->selectedTowerType = gGREEN1;
             break;
 
+          case SDLK_q:
+            if(game->rRatio < 255)
+              game->rRatio += 1;
+            break;
+          case SDLK_a:
+            if(game->rRatio > 1)
+              game->rRatio -= 1;
+            break;
+          case SDLK_w:
+            if(game->gRatio < 255)
+              game->gRatio += 1;
+            break;
+          case SDLK_s:
+            if(game->gRatio > 1)
+              game->gRatio -= 1;
+            break;
+          case SDLK_e:
+            if(game->bRatio < 255)
+              game->bRatio += 1;
+            break;
+          case SDLK_d:
+            if(game->bRatio > 1)
+              game->bRatio -= 1;
+            break;
+          
           case SDLK_SPACE:
             if(addTower(game, game->selectedTowerType) == TRUE)//returns true if tower was added
               findPath(game->grid);

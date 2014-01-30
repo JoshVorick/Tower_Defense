@@ -21,9 +21,9 @@ void initGame(Game *game){
   game->rStored = 300;
   game->gStored = 300;
   game->bStored = 300;
-  game->rRatio = 100;
-  game->gRatio = 100;
-  game->bRatio = 100;
+  game->rRatio = 20;
+  game->gRatio = 20;
+  game->bRatio = 20;
 
   initInputGame(game);
   initEnemyGenerator(game);
@@ -102,8 +102,8 @@ void drawGame(Game *game){
   sprintf(str, "R:G:B =  %i, %i, %i", game->rRatio, game->gRatio, game->bRatio);
   drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
   
-  int total = (game->rRatio + game->gRatio + game->bRatio) / 100.0;
-  sprintf(str, "Cost for selected Tower: %i,%i,%i", game->rRatio/total, game->gRatio/total, game->bRatio/total);
+  double total = (game->rRatio + game->gRatio + game->bRatio) / 300.0;
+  sprintf(str, "Cost for selected Tower: %d,%d,%d", (int)(game->rRatio/total), (int)(game->gRatio/total), (int)(game->bRatio/total));
   drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
   
   SDL_Flip(screen);
