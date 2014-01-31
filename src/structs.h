@@ -12,9 +12,10 @@ typedef struct StartMenu{
 } StartMenu;
 
 typedef struct Tower{
-  int level, kills, type, ticksSinceFired;
-  float x, y, health, barrelAngle; 
+  int dmg, kills, type, fireRate, ticksSinceFired, range;
+  float x, y, health; 
   struct Tower *nextTower;
+  SDL_Color color;
   /*width, cost, dmg, fireRate, sellPrice, etc will be constants in defs.h*/
 } Tower;
 

@@ -10,6 +10,7 @@ extern void closeFont(TTF_Font *);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
 extern SDL_Surface *loadImage(char *name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
+extern void drawTowers(Game *game);
 extern void freeGrid(Grid *grid);
 
 void initGame(Game *game){
@@ -33,8 +34,8 @@ void initGame(Game *game){
   game->sprites[gGRID_TILE].image = loadImage("img/Grid_Tile.png");
   game->sprites[gENEMY1].image = loadImage("img/Alien1.png");
   game->sprites[gENEMY2].image = loadImage("img/Alien2.png");
-  game->sprites[gBLUE1].image = loadImage("img/Blue1.png");
-  game->sprites[gGREEN1].image = loadImage("img/Green1.png");
+  game->sprites[gBLUE1].image = loadImage("img/TriangleTower.png");
+  game->sprites[gGREEN1].image = loadImage("img/SquareTower.png");
   game->sprites[gBACKGROUND].image = loadImage("img/GameBackground.png");
 
   game->font = TTF_OpenFont("fonts/blackWolf.ttf", 16);
@@ -71,20 +72,18 @@ void drawGame(Game *game){
     for(j=0; j < game->grid->dimensionY; j++)
       drawImage(game->sprites[gGRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
 
-  Tower *curTower = game->towers;
-  while(curTower != NULL){
-    drawImage(game->sprites[curTower->type].image, curTower->x, curTower->y);
-    curTower = curTower->nextTower;
-  }
+  drawTowers(game);
 
   Enemy *curEnemy = game->enemies;
   while(curEnemy != NULL){
     drawImage(game->sprites[curEnemy->type].image, curEnemy->x, curEnemy->y);
+
+    //draw health bar
     SDL_Rect rect = {curEnemy->x, curEnemy->y, game->sprites[curEnemy->type].image->w, 4};
-   SDL_FillRect(screen, &rect, 0xAAAAAA);
-   rect.w = game->sprites[curEnemy->type].image->w * curEnemy->health / curEnemy->maxHealth;
-   SDL_FillRect(screen, &rect, 0xFF0000);
-   curEnemy = curEnemy->nextEnemy;
+    SDL_FillRect(screen, &rect, 0xAAAAAA);
+    rect.w = game->sprites[curEnemy->type].image->w * curEnemy->health / curEnemy->maxHealth;
+    SDL_FillRect(screen, &rect, 0xFF0000);
+    curEnemy = curEnemy->nextEnemy;
   }
 
   SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
@@ -125,7 +124,7 @@ void freeGame(Game* game){
     curEnemy = curEnemy->nextEnemy;
     free(tempE);
   }
-  
+
   Tower *curTower = game->towers;
   Tower *tempT;
   while(curTower != NULL){
