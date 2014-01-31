@@ -28,10 +28,16 @@ void getInputGame(Game *game){
             break;
           
           case SDLK_1:
-            game->selectedTowerType = gBLUE1;
+            game->selectedTowerType = TRIANGLE;
             break;
           case SDLK_2:
-            game->selectedTowerType = gGREEN1;
+            game->selectedTowerType = SQUARE;
+            break;
+          case SDLK_3:
+            game->selectedTowerType = PENTAGON;
+            break;
+          case SDLK_4:
+            game->selectedTowerType = HEXAGON;
             break;
 
           case SDLK_q:

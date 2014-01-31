@@ -45,15 +45,25 @@ int addTower(Game *game, int towerType){
   newTower->ticksSinceFired = 0;
 
   switch(towerType){
-    case gBLUE1:
-      newTower->dmg = BLUE1_DMG;
-      newTower->fireRate = BLUE1_FIRERATE;
-      newTower->range = BLUE1_RANGE;
+    case TRIANGLE:
+      newTower->dmg = TRIANGLE_DMG;
+      newTower->fireRate = TRIANGLE_FIRERATE;
+      newTower->range = TRIANGLE_RANGE;
       break;
-    case gGREEN1:
-      newTower->dmg = GREEN1_DMG;
-      newTower->fireRate = GREEN1_DMG;
-      newTower->range = GREEN1_RANGE;
+    case SQUARE:
+      newTower->dmg = SQUARE_DMG;
+      newTower->fireRate = SQUARE_FIRERATE;
+      newTower->range = SQUARE_RANGE;
+      break;
+    case PENTAGON:
+      newTower->dmg = PENTAGON_DMG;
+      newTower->fireRate = PENTAGON_FIRERATE;
+      newTower->range = PENTAGON_RANGE;
+      break;
+    case HEXAGON:
+      newTower->dmg = HEXAGON_DMG;
+      newTower->fireRate = HEXAGON_FIRERATE;
+      newTower->range = HEXAGON_RANGE;
       break;
   }
     
@@ -78,7 +88,7 @@ Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy){
 
 void towerShoot(Enemy *enemy, Tower *tower){
   enemy->health -= tower->dmg;
-}
+};
 
 void drawTowers(Game *game){
   Tower *curTower = game->towers;

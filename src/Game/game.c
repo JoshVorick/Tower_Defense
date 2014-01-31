@@ -18,7 +18,7 @@ void initGame(Game *game){
   game->levelTime = 0;
   game->inGame = TRUE;
   game->score = 0;
-  game->selectedTowerType = gBLUE1;
+  game->selectedTowerType = TRIANGLE;
   game->rStored = 300;
   game->gStored = 300;
   game->bStored = 300;
@@ -31,12 +31,14 @@ void initGame(Game *game){
   game->towers = NULL;
   game->enemies = NULL;
 
-  game->sprites[gGRID_TILE].image = loadImage("img/Grid_Tile.png");
-  game->sprites[gENEMY1].image = loadImage("img/Alien1.png");
-  game->sprites[gENEMY2].image = loadImage("img/Alien2.png");
-  game->sprites[gBLUE1].image = loadImage("img/TriangleTower.png");
-  game->sprites[gGREEN1].image = loadImage("img/SquareTower.png");
   game->sprites[gBACKGROUND].image = loadImage("img/GameBackground.png");
+  game->sprites[GRID_TILE].image = loadImage("img/Grid_Tile.png");
+  game->sprites[ENEMY1].image = loadImage("img/Alien1.png");
+  game->sprites[ENEMY2].image = loadImage("img/Alien2.png");
+  game->sprites[TRIANGLE].image = loadImage("img/TriangleTower.png");
+  game->sprites[SQUARE].image = loadImage("img/SquareTower.png");
+  game->sprites[PENTAGON].image = loadImage("img/PentagonTower.png");
+  game->sprites[HEXAGON].image = loadImage("img/HexagonTower.png");  
 
   game->font = TTF_OpenFont("fonts/blackWolf.ttf", 16);
   game->fontColor.r = 200;
@@ -70,7 +72,7 @@ void drawGame(Game *game){
   
   for(i=0; i < game->grid->dimensionX; i++)
     for(j=0; j < game->grid->dimensionY; j++)
-      drawImage(game->sprites[gGRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
+      drawImage(game->sprites[GRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
 
   drawTowers(game);
 
@@ -87,7 +89,7 @@ void drawGame(Game *game){
   }
 
   SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
-  SDL_FillRect(screen, &rect, SDL_MapRGBA(game->sprites[gENEMY1].image->format,100,100,100,255));
+  SDL_FillRect(screen, &rect, 0xAAAAAA);
   
   char str[20];
   sprintf(str, "Press M to go to menu. Score: %d", game->score);

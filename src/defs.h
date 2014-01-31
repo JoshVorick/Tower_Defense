@@ -14,18 +14,20 @@ enum startMenuSprites{
   sBACKGROUND
 };
 
-#define NUM_SPRITES_GAME 6 
+#define NUM_SPRITES_GAME 8 
 #define NUM_SOUNDS_GAME 0
-#define NUM_TOWERS 2
+#define NUM_TOWERS 4
 #define NUM_ENEMIES 2
 
 enum gameSprites{
   gBACKGROUND,
-  gGRID_TILE,
-  gENEMY1,
-  gENEMY2,
-  gBLUE1,
-  gGREEN1,
+  GRID_TILE,
+  ENEMY1,
+  ENEMY2,
+  TRIANGLE,
+  SQUARE,
+  PENTAGON,
+  HEXAGON
 };
 
 enum directions{
@@ -34,20 +36,33 @@ enum directions{
   UP,
   RIGHT
 };
+
 #define FALSE 0
 #define TRUE 1
 
-#define BLUE1_PRICE 25
-#define BLUE1_SELL 18
-#define BLUE1_FIRERATE 100 
-#define BLUE1_DMG 15 
-#define BLUE1_RANGE 450
+#define TRIANGLE_PRICE 300
+#define TRIANGLE_SELL 230
+#define TRIANGLE_FIRERATE 100 
+#define TRIANGLE_DMG 15 
+#define TRIANGLE_RANGE 200
 
-#define GREEN1_PRICE 15
-#define GREEN1_SELL 18
-#define GREEN1_FIRERATE 30
-#define GREEN1_DMG 5 
-#define GREEN1_RANGE 300
+#define SQUARE_PRICE 400
+#define SQUARE_SELL 280
+#define SQUARE_FIRERATE 30
+#define SQUARE_DMG 20
+#define SQUARE_RANGE 300
+
+#define PENTAGON_PRICE 500
+#define PENTAGON_SELL 400
+#define PENTAGON_FIRERATE 30
+#define PENTAGON_DMG 25 
+#define PENTAGON_RANGE 400
+
+#define HEXAGON_PRICE 600
+#define HEXAGON_SELL 500
+#define HEXAGON_FIRERATE 30
+#define HEXAGON_DMG 30 
+#define HEXAGON_RANGE 500
 
 #define ENEMY1_SPEED 0.4
 #define ENEMY1_HEALTH 100
