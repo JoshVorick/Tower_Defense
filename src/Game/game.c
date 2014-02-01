@@ -25,6 +25,15 @@ void initGame(Game *game){
   game->rRatio = 20;
   game->gRatio = 20;
   game->bRatio = 20;
+  
+  int i;
+  for(i=0;i<NUM_GAME_KEYS;i++)
+    game->keys[i] = FALSE;
+  
+  game->towerPrices[TRIANGLE] = TRIANGLE_PRICE;
+  game->towerPrices[SQUARE] = SQUARE_PRICE;
+  game->towerPrices[PENTAGON] = PENTAGON_PRICE;
+  game->towerPrices[HEXAGON] = HEXAGON_PRICE;
 
   initInputGame(game);
   initEnemyGenerator(game);
@@ -89,7 +98,7 @@ void drawGame(Game *game){
   }
 
   SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
-  SDL_FillRect(screen, &rect, 0xAAAAAA);
+  SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, game->rRatio, game->gRatio, game->bRatio));
   
   char str[20];
   sprintf(str, "Press M to go to menu. Score: %d", game->score);
@@ -103,7 +112,7 @@ void drawGame(Game *game){
   sprintf(str, "R:G:B =  %i, %i, %i", game->rRatio, game->gRatio, game->bRatio);
   drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
   
-  double total = (game->rRatio + game->gRatio + game->bRatio) / 300.0;
+  double total = (game->rRatio + game->gRatio + game->bRatio) / (double)game->towerPrices[game->selectedTowerType];
   sprintf(str, "Cost for selected Tower: %d,%d,%d", (int)(game->rRatio/total), (int)(game->gRatio/total), (int)(game->bRatio/total));
   drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
   

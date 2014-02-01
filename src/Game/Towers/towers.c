@@ -24,7 +24,7 @@ void updateTowers(Game *game){
 int addTower(Game *game, int towerType){
   if(game->grid->blocksPath == TRUE)
     return FALSE;
-  double total = (game->rRatio + game->gRatio + game->bRatio)/300.0;
+  double total = (game->rRatio + game->gRatio + game->bRatio) / (double)game->towerPrices[game->selectedTowerType];
   if(game->rStored < game->rRatio / total || game->gStored < game->gRatio/total || game->bStored < game->bRatio/total)
     return FALSE;
   

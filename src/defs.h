@@ -21,14 +21,14 @@ enum startMenuSprites{
 #define NUM_GAME_KEYS 20
 
 enum gameSprites{
-  gBACKGROUND,
-  GRID_TILE,
-  ENEMY1,
-  ENEMY2,
   TRIANGLE,
   SQUARE,
   PENTAGON,
-  HEXAGON
+  HEXAGON,
+  gBACKGROUND,
+  GRID_TILE,
+  ENEMY1,
+  ENEMY2
 };
 
 enum directions{

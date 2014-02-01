@@ -52,6 +52,7 @@ typedef struct Game{
   int totalTime, levelTime, inGame, score, selectedTowerType;
   int rStored, gStored, bStored; //RGB resources for buying towers
   int rRatio, gRatio, bRatio; //Ratio of R:G:B to be used when next tower is bought
+  int towerPrices[NUM_TOWERS];
   int keys[NUM_GAME_KEYS];
   Sprite sprites[NUM_SPRITES_GAME];
   SDL_Color fontColor, fontBGColor;
