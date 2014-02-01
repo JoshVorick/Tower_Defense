@@ -18,6 +18,7 @@ enum startMenuSprites{
 #define NUM_SOUNDS_GAME 0
 #define NUM_TOWERS 4
 #define NUM_ENEMIES 2
+#define NUM_GAME_KEYS 20
 
 enum gameSprites{
   gBACKGROUND,
@@ -35,6 +36,29 @@ enum directions{
   DOWN,
   UP,
   RIGHT
+};
+
+enum gameKeys{
+  H,
+  J,
+  K,
+  L,
+  LEFT_ARROW,
+  DOWN_ARROW,
+  UP_ARROW,
+  RIGHT_ARROW,
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  Q,
+  W,
+  E,
+  A,
+  S,
+  D,
+  SHIFT,
+  SPACE
 };
 
 #define FALSE 0
