@@ -19,9 +19,9 @@ void initGame(Game *game){
   game->inGame = TRUE;
   game->score = 0;
   game->selectedTowerType = TRIANGLE;
-  game->rStored = 300;
-  game->gStored = 300;
-  game->bStored = 300;
+  game->rStored = 3000;
+  game->gStored = 3000;
+  game->bStored = 3000;
   game->rRatio = 20;
   game->gRatio = 20;
   game->bRatio = 20;
@@ -65,10 +65,11 @@ void initGame(Game *game){
 };
 
 void updateGame(Game *game){
-  game->totalTime += 1;
-  game->levelTime += 1;
-  
-  addEnemies(game);
+  game->totalTime++;
+  if(game->levelTime){
+    game->levelTime++;
+    addEnemies(game);
+  }
 
   updateTowers(game);
   updateEnemies(game);

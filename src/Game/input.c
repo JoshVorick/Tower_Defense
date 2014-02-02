@@ -57,8 +57,8 @@ void getInputGame(Game *game){
             break;
           case SDLK_a:
             game->rRatio -= 1 + 20*game->keys[SHIFT];
-            if(game->rRatio < 0)
-              game->rRatio = 0;
+            if(game->rRatio < 1)
+              game->rRatio = 1;
             game->keys[A] = TRUE;
             break;
           case SDLK_w:
@@ -69,8 +69,8 @@ void getInputGame(Game *game){
             break;
           case SDLK_s:
             game->gRatio -= 1 + 20*game->keys[SHIFT];
-            if(game->gRatio < 0)
-              game->gRatio = 0;
+            if(game->gRatio < 1)
+              game->gRatio = 1;
             game->keys[S] = TRUE;
             break;
           case SDLK_e:
@@ -81,8 +81,8 @@ void getInputGame(Game *game){
             break;
           case SDLK_d:
             game->bRatio -= 1 + 20*game->keys[SHIFT];
-            if(game->bRatio < 0)
-              game->bRatio = 0;
+            if(game->bRatio < 1)
+              game->bRatio = 1;
             game->keys[D] = TRUE;
             break;
           
@@ -91,7 +91,8 @@ void getInputGame(Game *game){
               findPath(game->grid);
             game->keys[SPACE] = TRUE;
             break;
-
+          
+          case SDLK_UP:
           case SDLK_k:
             if(game->grid->selectedTile->j > 0){
               //move selectedTile
@@ -101,6 +102,7 @@ void getInputGame(Game *game){
             }
             game->keys[K] = TRUE;
             break;
+          case SDLK_LEFT:
           case SDLK_h:
             if(game->grid->selectedTile->i > 0){
               //move selectedTile
@@ -110,6 +112,7 @@ void getInputGame(Game *game){
             }
             game->keys[H] = TRUE;
             break;
+          case SDLK_DOWN:
           case SDLK_j:
             if(game->grid->selectedTile->j < game->grid->dimensionY-1){
               //move selectedTile
@@ -119,6 +122,7 @@ void getInputGame(Game *game){
             }
             game->keys[J] = TRUE;
             break;
+          case SDLK_RIGHT:
           case SDLK_l:
             if(game->grid->selectedTile->i < game->grid->dimensionX-1){
               //move selectedTile
@@ -127,6 +131,12 @@ void getInputGame(Game *game){
               wouldBlockPath(game->grid);
             }
             game->keys[L] = TRUE;
+            break;
+          
+          case SDLK_RETURN:
+            game->keys[RETURN] = TRUE;
+            if(game->levelTime < 1)
+              game->levelTime = 1;
             break;
 
           default:
@@ -176,17 +186,25 @@ void getInputGame(Game *game){
             game->keys[SPACE] = FALSE;
             break;
 
+          case SDLK_UP:
           case SDLK_k:
             game->keys[K] = FALSE;
             break;
+          case SDLK_LEFT:
           case SDLK_h:
             game->keys[H] = FALSE;
             break;
+          case SDLK_DOWN:
           case SDLK_j:
             game->keys[J] = FALSE;
             break;
+          case SDLK_RIGHT:
           case SDLK_l:
             game->keys[L] = FALSE;
+            break;
+          
+          case SDLK_RETURN:
+            game->keys[RETURN] = FALSE;
             break;
           default:
             break;

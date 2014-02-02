@@ -18,7 +18,16 @@ enum startMenuSprites{
 #define NUM_SOUNDS_GAME 0
 #define NUM_TOWERS 4
 #define NUM_ENEMIES 2
-#define NUM_GAME_KEYS 20
+#define NUM_GAME_KEYS 21
+#define MAX_WAVES 50
+#define NUM_INFO_PIECES 4
+
+enum enemy_info{//different values for each enemy type
+  START_DELAY,  //ticks to delay before group of wave enters
+  GROUP_DELAY,  //ticks to delay between sending each group
+  NUM_GROUPS,   //num of groups this wave
+  NUM_PER_GROUP //num enemies in each group
+};
 
 enum gameSprites{
   TRIANGLE,
@@ -58,7 +67,8 @@ enum gameKeys{
   S,
   D,
   SHIFT,
-  SPACE
+  SPACE,
+  RETURN
 };
 
 #define FALSE 0
@@ -68,35 +78,35 @@ enum gameKeys{
 #define TRIANGLE_SELL 230
 #define TRIANGLE_FIRERATE 100 
 #define TRIANGLE_DMG 15 
-#define TRIANGLE_RANGE 200
+#define TRIANGLE_RANGE 150
 
 #define SQUARE_PRICE 400
 #define SQUARE_SELL 280
 #define SQUARE_FIRERATE 30
 #define SQUARE_DMG 20
-#define SQUARE_RANGE 300
+#define SQUARE_RANGE 200
 
 #define PENTAGON_PRICE 500
 #define PENTAGON_SELL 400
 #define PENTAGON_FIRERATE 30
 #define PENTAGON_DMG 25 
-#define PENTAGON_RANGE 400
+#define PENTAGON_RANGE 250
 
 #define HEXAGON_PRICE 600
 #define HEXAGON_SELL 500
 #define HEXAGON_FIRERATE 30
 #define HEXAGON_DMG 30 
-#define HEXAGON_RANGE 500
+#define HEXAGON_RANGE 250
 
-#define ENEMY1_SPEED 0.4
-#define ENEMY1_HEALTH 100
+#define ENEMY1_SPEED 0.8
+#define ENEMY1_HEALTH 300
 #define ENEMY1_SCORE 100
 #define ENEMY1_R 10
 #define ENEMY1_G 5
 #define ENEMY1_B 15
 
-#define ENEMY2_SPEED 0.2
-#define ENEMY2_HEALTH 200
+#define ENEMY2_SPEED 0.5
+#define ENEMY2_HEALTH 600
 #define ENEMY2_SCORE 150
 #define ENEMY2_R 15
 #define ENEMY2_G 20

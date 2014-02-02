@@ -46,7 +46,10 @@ typedef struct Enemy{
 
 typedef struct EnemyGenerator{
   int tBetweenEnemy;
-}EnemyGenerator;
+  float healthScale, RGBScale; //More health every wave, less RGB every wave
+  int wave, maxWave;
+  int info[NUM_ENEMIES][MAX_WAVES][NUM_INFO_PIECES];
+} EnemyGenerator;
 
 typedef struct Game{
   int totalTime, levelTime, inGame, score, selectedTowerType;
