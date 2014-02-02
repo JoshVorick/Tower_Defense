@@ -12,6 +12,7 @@ extern SDL_Surface *loadImage(char *name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
 extern void drawTowers(Game *game);
 extern void freeGrid(Grid *grid);
+extern void findPath(Game *game);
 
 void initGame(Game *game){
   game->totalTime = 0;
@@ -68,7 +69,7 @@ void updateGame(Game *game){
   game->totalTime++;
   if(game->levelTime){
     game->levelTime++;
-    addEnemies(game);
+    addEnemies(game);//Adds enemies and checks if level is finished
   }
 
   updateTowers(game);

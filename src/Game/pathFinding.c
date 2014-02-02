@@ -8,8 +8,10 @@ findPath-
   starting at the tile next to the exit, and then iterating out to its adjacent
   tiles and having them point back to the tile before them until every
   unoccupied tile has an 'arrow'
-
-  time to find optimal path to exit from every tile on a grid of 4,000,000 tiles: 0.651 - 0.654 seconds
+  
+  Big O notation is O(n) (iterates through each grid tile once)
+  time to find optimal path to exit from every tile on a grid of 4,000,000 tiles: ~650 milliseconds
+  A quicksort of 4,000,000 integers on the same computer took ~1060 milliseconds
 */
 #include "pathFinding.h"
 

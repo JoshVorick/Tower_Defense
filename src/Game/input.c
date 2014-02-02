@@ -135,7 +135,7 @@ void getInputGame(Game *game){
           
           case SDLK_RETURN:
             game->keys[RETURN] = TRUE;
-            if(game->levelTime < 1)
+            if(game->levelTime < 1 && game->enemies == NULL)
               game->levelTime = 1;
             break;
 

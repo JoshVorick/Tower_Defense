@@ -20,13 +20,15 @@ enum startMenuSprites{
 #define NUM_ENEMIES 2
 #define NUM_GAME_KEYS 21
 #define MAX_WAVES 50
-#define NUM_INFO_PIECES 4
+#define NUM_INFO_PIECES 6
 
-enum enemy_info{//different values for each enemy type
-  START_DELAY,  //ticks to delay before group of wave enters
-  GROUP_DELAY,  //ticks to delay between sending each group
-  NUM_GROUPS,   //num of groups this wave
-  NUM_PER_GROUP //num enemies in each group
+enum enemy_info{  //different values for each enemy type
+  START_DELAY,        //ticks to delay before group of wave enters
+  GROUP_DELAY,        //ticks to delay between sending each group
+  NUM_GROUPS,         //num of groups this wave
+  NUM_PER_GROUP,      //num enemies in each group
+  DELAY_WITHIN_GROUP, //delay between each in consecutive enemy in a group
+  LOOP_AFTER          //Number of waves before wave style starts looping
 };
 
 enum gameSprites{
@@ -98,15 +100,15 @@ enum gameKeys{
 #define HEXAGON_DMG 30 
 #define HEXAGON_RANGE 250
 
-#define ENEMY1_SPEED 0.8
-#define ENEMY1_HEALTH 300
+#define ENEMY1_SPEED 0.6
+#define ENEMY1_HEALTH 1300
 #define ENEMY1_SCORE 100
 #define ENEMY1_R 10
 #define ENEMY1_G 5
 #define ENEMY1_B 15
 
-#define ENEMY2_SPEED 0.5
-#define ENEMY2_HEALTH 600
+#define ENEMY2_SPEED 0.3
+#define ENEMY2_HEALTH 1600
 #define ENEMY2_SCORE 150
 #define ENEMY2_R 15
 #define ENEMY2_G 20
