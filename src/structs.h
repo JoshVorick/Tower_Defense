@@ -45,7 +45,7 @@ typedef struct Enemy{
 } Enemy;
 
 typedef struct EnemyGenerator{
-  float healthScale, RGBScale; //More health every wave, less RGB every wave
+  double healthScale, RGBScale; //More health every wave, less RGB every wave
   int wave, maxWave;
   int info[NUM_ENEMIES][MAX_WAVES][NUM_INFO_PIECES];
 } EnemyGenerator;

@@ -100,15 +100,16 @@ enum gameKeys{
 #define HEXAGON_DMG 30 
 #define HEXAGON_RANGE 250
 
+
 #define ENEMY1_SPEED 0.6
-#define ENEMY1_HEALTH 1300
+#define ENEMY1_HEALTH 300
 #define ENEMY1_SCORE 100
 #define ENEMY1_R 10
 #define ENEMY1_G 5
 #define ENEMY1_B 15
 
-#define ENEMY2_SPEED 0.3
-#define ENEMY2_HEALTH 1600
+#define ENEMY2_SPEED 0.4
+#define ENEMY2_HEALTH 600
 #define ENEMY2_SCORE 150
 #define ENEMY2_R 15
 #define ENEMY2_G 20
