@@ -23,14 +23,16 @@ int findPath(Grid *grid){
   for(i=0;i<grid->dimensionX; i++)
     for(j=0;j<grid->dimensionY; j++){
       grid->tiles[i][j].dirToNextInPath = -1;
+      grid->tiles[i][j].distFromExit = -1;
       grid->tiles[i][j].nextInPath = NULL;
       grid->tiles[i][j].next = NULL;
     } 
   
   Grid_Tile *pathless; //used to iterate through tiles
-  if(grid->endTile->myTower == NULL)
-    pathless = grid->endTile; //start at end tile 
-  else
+  if(grid->endTile->myTower == NULL){
+    pathless = grid->endTile; //start at end tile
+    pathless->distFromExit = 0;
+  }else
     pathless = NULL;
 
   while(pathless != NULL){
@@ -42,7 +44,8 @@ int findPath(Grid *grid){
       if(curTile->i > 0 && grid->tiles[curTile->i-1][curTile->j].nextInPath == NULL && grid->tiles[curTile->i-1][curTile->j].myTower == NULL){
         grid->tiles[curTile->i-1][curTile->j].nextInPath = curTile;
         grid->tiles[curTile->i-1][curTile->j].dirToNextInPath = RIGHT;
-
+        grid->tiles[curTile->i-1][curTile->j].distFromExit = curTile->distFromExit + 1;
+        
         //add to array so its adjacent blocks will be calculated
         grid->tiles[curTile->i-1][curTile->j].next = pathless;
         pathless = &grid->tiles[curTile->i-1][curTile->j];
@@ -52,6 +55,7 @@ int findPath(Grid *grid){
       if(curTile->i < grid->dimensionX - 1 && grid->tiles[curTile->i+1][curTile->j].nextInPath == NULL && grid->tiles[curTile->i+1][curTile->j].myTower == NULL){
         grid->tiles[curTile->i+1][curTile->j].nextInPath = curTile;
         grid->tiles[curTile->i+1][curTile->j].dirToNextInPath = LEFT;
+        grid->tiles[curTile->i+1][curTile->j].distFromExit = curTile->distFromExit + 1;
 
         //add to array so its adjacent blocks will be calculated
         grid->tiles[curTile->i+1][curTile->j].next = pathless;
@@ -62,6 +66,7 @@ int findPath(Grid *grid){
       if(curTile->j > 0 && grid->tiles[curTile->i][curTile->j-1].nextInPath == NULL && grid->tiles[curTile->i][curTile->j-1].myTower == NULL){
         grid->tiles[curTile->i][curTile->j-1].nextInPath = curTile;
         grid->tiles[curTile->i][curTile->j-1].dirToNextInPath = DOWN;
+        grid->tiles[curTile->i][curTile->j-1].distFromExit = curTile->distFromExit + 1;
 
         //add to array so its adjacent blocks will be calculated
         grid->tiles[curTile->i][curTile->j-1].next = pathless;
@@ -72,6 +77,7 @@ int findPath(Grid *grid){
       if(curTile->j < grid->dimensionY-1 && grid->tiles[curTile->i][curTile->j+1].nextInPath == NULL && grid->tiles[curTile->i][curTile->j+1].myTower == NULL){
         grid->tiles[curTile->i][curTile->j+1].nextInPath = curTile;
         grid->tiles[curTile->i][curTile->j+1].dirToNextInPath = UP;
+        grid->tiles[curTile->i][curTile->j+1].distFromExit = curTile->distFromExit + 1;
 
         //add to array so its adjacent blocks will be calculated
         grid->tiles[curTile->i][curTile->j+1].next = pathless;
@@ -90,7 +96,8 @@ int findPath(Grid *grid){
       pathless = NULL;
     else
       curTile->next = NULL;
-  } 
+  }
+  grid->endTile->distFromExit = 0; 
   printf("ticks used to calculate path: %i \n",SDL_GetTicks()-startTicks); //to get end time
 
   return grid->startTile->nextInPath != NULL; 

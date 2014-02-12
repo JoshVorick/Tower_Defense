@@ -12,6 +12,7 @@ void initGrid(Grid* grid, int x, int y){
       grid->tiles[i][j].y = y + j*50;
       grid->tiles[i][j].i = i;
       grid->tiles[i][j].j = j;
+      grid->tiles[i][j].distFromExit = 0;
       grid->tiles[i][j].myTower = NULL;
       if(j < grid->dimensionY - 1){ 
         grid->tiles[i][j].nextInPath = &grid->tiles[i][j+1];

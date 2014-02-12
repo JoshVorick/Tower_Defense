@@ -96,9 +96,9 @@ enum gameKeys{
 
 #define HEXAGON_PRICE 600
 #define HEXAGON_SELL 500
-#define HEXAGON_FIRERATE 30
-#define HEXAGON_DMG 30 
-#define HEXAGON_RANGE 250
+#define HEXAGON_FIRERATE 100
+#define HEXAGON_DMG 300 
+#define HEXAGON_RANGE 550
 
 
 #define ENEMY1_SPEED 0.6

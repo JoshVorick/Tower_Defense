@@ -6,6 +6,7 @@ extern void initEnemyGenerator(Game*game);
 extern void addEnemies(Game *game);
 extern void updateTowers(Game *game);
 extern void updateEnemies(Game *game);
+extern Enemy* msortEnemies(Enemy* enemy);
 extern void closeFont(TTF_Font *);
 extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int centerY, SDL_Color foregroundColor, SDL_Color backgroundColor);
 extern SDL_Surface *loadImage(char *name);
@@ -74,6 +75,7 @@ void updateGame(Game *game){
 
   updateTowers(game);
   updateEnemies(game);
+  game->enemies = msortEnemies(game->enemies);
 };
 
 void drawGame(Game *game){
@@ -82,8 +84,12 @@ void drawGame(Game *game){
   int i,j;
   
   for(i=0; i < game->grid->dimensionX; i++)
-    for(j=0; j < game->grid->dimensionY; j++)
+    for(j=0; j < game->grid->dimensionY; j++){
       drawImage(game->sprites[GRID_TILE].image, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y);
+      char str[1];
+      sprintf(str, "%i", game->grid->tiles[i][j].distFromExit);
+      drawString(str, game->grid->tiles[i][j].x, game->grid->tiles[i][j].y, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  }
 
   drawTowers(game);
 
