@@ -5,6 +5,7 @@ extern void initGrid(Grid* grid, int x, int y);
 extern void initEnemyGenerator(Game*game);
 extern void addEnemies(Game *game);
 extern void updateTowers(Game *game);
+extern void updateBullets(Game *game);
 extern void updateEnemies(Game *game);
 extern Enemy* msortEnemies(Enemy* enemy);
 extern void closeFont(TTF_Font *);
@@ -12,6 +13,7 @@ extern void drawString(char *text, int x, int y, TTF_Font *font, int centerX, in
 extern SDL_Surface *loadImage(char *name);
 extern void drawImage(SDL_Surface *surface, int x, int y);
 extern void drawTowers(Game *game);
+extern void drawBullets(Game *game);
 extern void freeGrid(Grid *grid);
 extern void findPath(Game *game);
 
@@ -41,6 +43,7 @@ void initGame(Game *game){
   initEnemyGenerator(game);
   game->towers = NULL;
   game->enemies = NULL;
+  game->bullets = NULL;
 
   game->sprites[gBACKGROUND].image = loadImage("img/GameBackground.png");
   game->sprites[GRID_TILE].image = loadImage("img/Grid_Tile.png");
@@ -75,6 +78,7 @@ void updateGame(Game *game){
 
   updateTowers(game);
   updateEnemies(game);
+  updateBullets(game);
   game->enemies = msortEnemies(game->enemies);
 };
 
@@ -104,7 +108,9 @@ void drawGame(Game *game){
     SDL_FillRect(screen, &rect, 0xFF0000);
     curEnemy = curEnemy->nextEnemy;
   }
-
+  
+  drawBullets(game);
+  
   SDL_Rect rect = {game->grid->selectedTile->x+20, game->grid->selectedTile->y+20, 10, 10};
   SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, game->rRatio, game->gRatio, game->bRatio));
   

@@ -50,6 +50,12 @@ typedef struct EnemyGenerator{
   int info[NUM_ENEMIES][MAX_WAVES][NUM_INFO_PIECES];
 } EnemyGenerator;
 
+typedef struct Bullet{
+  int width, time, targetX, targetY; 
+  Tower *origin;
+  struct Bullet *nextBullet;
+} Bullet;
+
 typedef struct Game{
   int totalTime, levelTime, inGame, score, selectedTowerType;
   int rStored, gStored, bStored; //RGB resources for buying towers
@@ -60,6 +66,7 @@ typedef struct Game{
   SDL_Color fontColor, fontBGColor;
   Grid *grid; /*grid of the game*/
   Tower *towers; /*Linked list*/
+  Bullet *bullets;
   Enemy *enemies;
   EnemyGenerator enemyGenerator;
   TTF_Font *font;

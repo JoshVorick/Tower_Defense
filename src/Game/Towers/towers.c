@@ -3,6 +3,7 @@
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy);
 void towerShoot(Enemy *enemy, Tower *tower);
 extern void drawImage(SDL_Surface *surface, int x, int y);
+extern void addBullet(Game *game, Tower *tower, Enemy *enemy);
 
 void updateTowers(Game *game){
   //Loop through each tower
@@ -14,6 +15,8 @@ void updateTowers(Game *game){
       Enemy *gonnaGetShot = findEnemyInRange(curTower->x, curTower->y, curTower->range, game->enemies);
       if(gonnaGetShot != NULL){
         towerShoot(gonnaGetShot, curTower);
+        printf("HA\n");
+        addBullet(game, curTower, gonnaGetShot);
         curTower->ticksSinceFired = 0;
       }
     }
@@ -78,7 +81,7 @@ int addTower(Game *game, int towerType){
 
 Enemy* findEnemyInRange(int x, int y, int radius, Enemy *curEnemy){
   while(curEnemy != NULL){
-    if((curEnemy->x - x)*(curEnemy->x - x) + (curEnemy->y - y)*(curEnemy->y - y) <= radius*radius)
+    if(curEnemy->health > 0 && (curEnemy->x - x)*(curEnemy->x - x) + (curEnemy->y - y)*(curEnemy->y - y) <= radius*radius)
       return curEnemy;
     else
       curEnemy = curEnemy-> nextEnemy;
