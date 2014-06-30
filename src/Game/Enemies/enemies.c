@@ -121,13 +121,13 @@ void updateEnemies(Game *game){
       free(temp);
       printf("BAM!!!! \n");
     }else{
-      //If Enemy reached the end, confuse it for now
-      if(curEnemy->myGrid == NULL)
-        curEnemy->myGrid = &game->grid->tiles[3][0];
-
       //Move the enemy
       switch(curEnemy->dir){
       case LEFT:
+        if (curEnemy->myGrid == game->grid->endTile) {
+          curEnemy-> health = -1;
+          game->lives -= 1;
+        }
         curEnemy->x -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 <= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
@@ -136,6 +136,10 @@ void updateEnemies(Game *game){
         }
         break;
       case RIGHT:
+        if (curEnemy->myGrid == game->grid->endTile) {
+          curEnemy-> health = -1;
+          game->lives -= 1;
+        }
         curEnemy->x += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 >= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
@@ -144,6 +148,10 @@ void updateEnemies(Game *game){
         }
         break;
       case UP:
+        if (curEnemy->myGrid == game->grid->endTile) {
+          curEnemy-> health = -1;
+          game->lives -= 1;
+        }
         curEnemy->y -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 <= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){
@@ -152,6 +160,10 @@ void updateEnemies(Game *game){
         }
         break;
       case DOWN:
+        if (curEnemy->myGrid == game->grid->endTile) {
+          curEnemy-> health = -1;
+          game->lives -= 1;
+        }
         curEnemy->y += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 >= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){

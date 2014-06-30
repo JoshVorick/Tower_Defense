@@ -57,7 +57,7 @@ typedef struct Bullet{
 } Bullet;
 
 typedef struct Game{
-  int totalTime, levelTime, inGame, score, selectedTowerType;
+  int totalTime, levelTime, inGame, score, selectedTowerType, lives;
   int rStored, gStored, bStored; //RGB resources for buying towers
   int rRatio, gRatio, bRatio; //Ratio of R:G:B to be used when next tower is bought
   int towerPrices[NUM_TOWERS];

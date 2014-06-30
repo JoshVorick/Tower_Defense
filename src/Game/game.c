@@ -23,6 +23,7 @@ void initGame(Game *game){
   game->inGame = TRUE;
   game->score = 0;
   game->selectedTowerType = TRIANGLE;
+  game->lives = 20;
   game->rStored = 3000;
   game->gStored = 3000;
   game->bStored = 3000;
@@ -79,7 +80,6 @@ void updateGame(Game *game){
   updateTowers(game);
   updateEnemies(game);
   updateBullets(game);
-  game->enemies = msortEnemies(game->enemies);
 };
 
 void drawGame(Game *game){
@@ -125,6 +125,8 @@ void drawGame(Game *game){
   drawString(str, 0, 60, game->font, 0, 0, game->fontColor, game->fontBGColor);
   sprintf(str, "R:G:B =  %i, %i, %i", game->rRatio, game->gRatio, game->bRatio);
   drawString(str, 0, 0, game->font, 0, 0, game->fontColor, game->fontBGColor);
+  sprintf(str, "Lives left: %i", game->lives);
+  drawString(str, 0, 80, game->font, 0, 0, game->fontColor, game->fontBGColor);
   
   double total = (game->rRatio + game->gRatio + game->bRatio) / (double)game->towerPrices[game->selectedTowerType];
   sprintf(str, "Cost for selected Tower: %d,%d,%d", (int)(game->rRatio/total), (int)(game->gRatio/total), (int)(game->bRatio/total));
