@@ -50,37 +50,37 @@ void getInputGame(Game *game){
             break;
 
           case SDLK_q:
-            game->rRatio += 1 + 20*game->keys[SHIFT];
+            game->rRatio += 30 - 29*game->keys[SHIFT];
             if(game->rRatio > 255)
               game->rRatio = 255;
             game->keys[Q] = TRUE;
             break;
           case SDLK_a:
-            game->rRatio -= 1 + 20*game->keys[SHIFT];
+            game->rRatio -= 30 - 29*game->keys[SHIFT];
             if(game->rRatio < 1)
               game->rRatio = 1;
             game->keys[A] = TRUE;
             break;
           case SDLK_w:
-            game->gRatio += 1 + 20*game->keys[SHIFT];
+            game->gRatio += 30 - 29*game->keys[SHIFT];
             if(game->gRatio >255)
               game->gRatio = 255;
             game->keys[W] = TRUE;
             break;
           case SDLK_s:
-            game->gRatio -= 1 + 20*game->keys[SHIFT];
+            game->gRatio -= 30 - 29*game->keys[SHIFT];
             if(game->gRatio < 1)
               game->gRatio = 1;
             game->keys[S] = TRUE;
             break;
           case SDLK_e:
-            game->bRatio += 1 + 20*game->keys[SHIFT];
+            game->bRatio += 30 - 29*game->keys[SHIFT];
             if(game->bRatio > 255)
               game->bRatio = 255;
             game->keys[E] = TRUE;
             break;
           case SDLK_d:
-            game->bRatio -= 1 + 20*game->keys[SHIFT];
+            game->bRatio -= 20 - 29*game->keys[SHIFT];
             if(game->bRatio < 1)
               game->bRatio = 1;
             game->keys[D] = TRUE;

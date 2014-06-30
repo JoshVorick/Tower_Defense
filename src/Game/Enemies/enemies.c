@@ -104,12 +104,18 @@ void updateEnemies(Game *game){
   Enemy *curEnemy = game->enemies;
   Enemy *prevEnemy = NULL;
   while(curEnemy != NULL){
+    if (curEnemy->myGrid == game->grid->endTile) {
+      curEnemy-> health = -9999;
+      game->lives -= 1;
+    }
     //Remove enemy if its dead, add to score
     if(curEnemy->health <= 0){
-      game->score += curEnemy->score;
-      game->rStored += curEnemy->color.r;
-      game->gStored += curEnemy->color.g;
-      game->bStored += curEnemy->color.b;
+      if (curEnemy ->health > -9999) {
+        game->score += curEnemy->score;
+        game->rStored += curEnemy->color.r;
+        game->gStored += curEnemy->color.g;
+        game->bStored += curEnemy->color.b;
+      }
       Enemy *temp = curEnemy;
       if(prevEnemy != NULL){//If curEnemy is not first in list
         prevEnemy->nextEnemy = curEnemy->nextEnemy;
@@ -124,10 +130,6 @@ void updateEnemies(Game *game){
       //Move the enemy
       switch(curEnemy->dir){
       case LEFT:
-        if (curEnemy->myGrid == game->grid->endTile) {
-          curEnemy-> health = -1;
-          game->lives -= 1;
-        }
         curEnemy->x -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 <= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
@@ -136,10 +138,6 @@ void updateEnemies(Game *game){
         }
         break;
       case RIGHT:
-        if (curEnemy->myGrid == game->grid->endTile) {
-          curEnemy-> health = -1;
-          game->lives -= 1;
-        }
         curEnemy->x += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 >= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
@@ -148,10 +146,6 @@ void updateEnemies(Game *game){
         }
         break;
       case UP:
-        if (curEnemy->myGrid == game->grid->endTile) {
-          curEnemy-> health = -1;
-          game->lives -= 1;
-        }
         curEnemy->y -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 <= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){
@@ -160,10 +154,6 @@ void updateEnemies(Game *game){
         }
         break;
       case DOWN:
-        if (curEnemy->myGrid == game->grid->endTile) {
-          curEnemy-> health = -1;
-          game->lives -= 1;
-        }
         curEnemy->y += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
         if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 >= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){
