@@ -20,18 +20,22 @@ int findPath(Grid *grid){
   int startTicks = SDL_GetTicks();//to find start time
   
   int i,j;
-  for(i=0;i<grid->dimensionX; i++)
-    for(j=0;j<grid->dimensionY; j++){
+  for(i=0;i<grid->dimensionX; i++) {
+    for(j=0;j<grid->dimensionY; j++) {
       grid->tiles[i][j].dirToNextInPath = -1;
       grid->tiles[i][j].distFromExit = -1;
       grid->tiles[i][j].nextInPath = NULL;
       grid->tiles[i][j].next = NULL;
     } 
-  
+  }
   Grid_Tile *pathless; //used to iterate through tiles
   if(grid->endTile->myTower == NULL){
-    pathless = grid->endTile; //start at end tile
-    pathless->distFromExit = 0;
+    grid->tiles[3][grid->dimensionY-1].distFromExit = 1;
+    grid->tiles[3][grid->dimensionY-1].dirToNextInPath = DOWN;
+    grid->tiles[3][grid->dimensionY-1].nextInPath = grid->endTile;
+    grid->tiles[3][grid->dimensionY-1].next = NULL;
+
+    pathless = &grid->tiles[3][grid->dimensionY-1]; //start at end tile
   }else
     pathless = NULL;
 
@@ -97,7 +101,6 @@ int findPath(Grid *grid){
     else
       curTile->next = NULL;
   }
-  grid->endTile->distFromExit = 0; 
   printf("ticks used to calculate path: %i \n",SDL_GetTicks()-startTicks); //to get end time
 
   return grid->startTile->nextInPath != NULL; 
