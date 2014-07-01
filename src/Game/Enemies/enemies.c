@@ -5,7 +5,7 @@ void initEnemy(Enemy *enemy, int type, Grid_Tile *startGrid, Sprite sprites[]){
   enemy->y = startGrid->y - sprites[type].image->h/2;
   enemy->type = type;
   enemy->dir = DOWN;
-  enemy->myGrid = startGrid;
+  enemy->curTile = startGrid;
   enemy->nextEnemy = NULL;
 
   switch(type){
@@ -72,7 +72,7 @@ Enemy* msortEnemies(Enemy *head){
           e = p;
           p = p->nextEnemy;
           psize--;
-        }else if(p->myGrid->distFromExit < q->myGrid->distFromExit || (p->myGrid->distFromExit == q->myGrid->distFromExit && p->y > q->y)){
+        }else if(p->curTile != NULL && q->curTile != NULL && (p->curTile->distFromExit < q->curTile->distFromExit || (p->curTile->distFromExit == q->curTile->distFromExit && p->y > q->y))){
           e = p;
           p = p->nextEnemy;
           psize--;
@@ -104,7 +104,7 @@ void updateEnemies(Game *game){
   Enemy *curEnemy = game->enemies;
   Enemy *prevEnemy = NULL;
   while(curEnemy != NULL){
-    if (curEnemy->myGrid == game->grid->endTile) {
+    if (curEnemy->curTile == game->grid->endTile && curEnemy->y + game->sprites[curEnemy->type].image->h / 2 >= curEnemy->curTile->y) {
       curEnemy-> health = -9999;
       game->lives -= 1;
     }
@@ -125,40 +125,39 @@ void updateEnemies(Game *game){
         curEnemy = curEnemy->nextEnemy;//iterate to next enemy
       }
       free(temp);
-      printf("BAM!!!! \n");
     }else{
       //Move the enemy
       switch(curEnemy->dir){
       case LEFT:
         curEnemy->x -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
-        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 <= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
-          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
-          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 <= curEnemy->curTile->x + game->sprites[GRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->curTile->dirToNextInPath;
+          curEnemy->curTile = curEnemy->curTile->nextInPath;
         }
         break;
       case RIGHT:
         curEnemy->x += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
-        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 >= curEnemy->myGrid->x + game->sprites[GRID_TILE].image->w/2){
-          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
-          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        if(curEnemy->x + game->sprites[curEnemy->type].image->w/2 >= curEnemy->curTile->x + game->sprites[GRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->curTile->dirToNextInPath;
+          curEnemy->curTile = curEnemy->curTile->nextInPath;
         }
         break;
       case UP:
         curEnemy->y -= curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
-        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 <= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){
-          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
-          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 <= curEnemy->curTile->y + game->sprites[GRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->curTile->dirToNextInPath;
+          curEnemy->curTile = curEnemy->curTile->nextInPath;
         }
         break;
       case DOWN:
         curEnemy->y += curEnemy->speed;
         //If its reached middle of grid, start moving towards next grid in path 
-        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 >= curEnemy->myGrid->y + game->sprites[GRID_TILE].image->w/2){
-          curEnemy->dir = curEnemy->myGrid->dirToNextInPath;
-          curEnemy->myGrid = curEnemy->myGrid->nextInPath;
+        if(curEnemy->y + game->sprites[curEnemy->type].image->h/2 >= curEnemy->curTile->y + game->sprites[GRID_TILE].image->w/2){
+          curEnemy->dir = curEnemy->curTile->dirToNextInPath;
+          curEnemy->curTile = curEnemy->curTile->nextInPath;
         }
         break;
       }

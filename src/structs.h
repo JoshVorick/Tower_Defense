@@ -37,7 +37,7 @@ typedef struct Enemy{
   float x, y, speed;
   int type, health, maxHealth, score, dir; /*Direction enemy is walking in*/
   SDL_Color color;
-  Grid_Tile *myGrid;
+  Grid_Tile *curTile;
   struct Enemy *nextEnemy;
   /*width, goldForKilling, totalHealth, speed stored as constants in defs.h 
     Something about its path/pathfinding (pointer to struct/var with its path?)

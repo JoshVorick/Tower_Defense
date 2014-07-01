@@ -29,7 +29,7 @@ int findPath(Grid *grid){
     } 
   }
   Grid_Tile *pathless; //used to iterate through tiles
-  if(grid->endTile->myTower == NULL){
+  if(grid->tiles[3][grid->dimensionY-1].myTower == NULL){
     grid->tiles[3][grid->dimensionY-1].distFromExit = 1;
     grid->tiles[3][grid->dimensionY-1].dirToNextInPath = DOWN;
     grid->tiles[3][grid->dimensionY-1].nextInPath = grid->endTile;
@@ -37,7 +37,7 @@ int findPath(Grid *grid){
 
     pathless = &grid->tiles[3][grid->dimensionY-1]; //start at end tile
   }else
-    pathless = NULL;
+    return FALSE;
 
   while(pathless != NULL){
     Grid_Tile *curTile = pathless;

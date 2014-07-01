@@ -27,9 +27,11 @@ void initGrid(Grid* grid, int x, int y){
   grid->startTile = &grid->tiles[3][0];
   grid->endTile = malloc(sizeof(Grid_Tile));
   grid->endTile->distFromExit = 0;
-  grid->endTile->dirToNextInPath = -1;
+  grid->endTile->dirToNextInPath = DOWN;
   grid->endTile->nextInPath = NULL;
   grid->endTile->next = NULL;
+  grid->endTile->x = grid->tiles[3][grid->dimensionY-1].x + 50;
+  grid->endTile->y = grid->tiles[3][grid->dimensionY-1].y + 50;
 };
 
 void freeGrid(Grid* grid){
